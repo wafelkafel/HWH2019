@@ -50,6 +50,7 @@ def draw():
             screen.blit('ocean1', (0,0))
             oil1.draw()
             oil2.draw()
+            turtle.draw()
         elif game_level == 4:
             x = 0
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
