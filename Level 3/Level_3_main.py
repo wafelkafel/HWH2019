@@ -14,6 +14,8 @@ trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
 shark1 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
 shark2 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
 net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))))
+oil1 = Actor('oil1', (WIDTH, ( random.randint(0,HEIGHT))))
+oil2 = Actor('oil2', (WIDTH, ( random.randint(0,HEIGHT))))
 
 # Initial state of the turtle
 turtle.dead = False
@@ -44,9 +46,10 @@ def draw():
             shark2.draw()
             net.draw()
             turtle.draw()
-
         elif game_level == 3:
-            x = 0
+            screen.blit('ocean1', (0,0))
+            oil1.draw()
+            oil2.draw()
         elif game_level == 4:
             x = 0
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
@@ -103,6 +106,12 @@ def update_turtle():
             game_active = 0
             reset_turtle()
             reset_sharknet()
+    elif game_level==3:
+        if turtle.colliderect(oil1) or turtle.colliderect(oil2):
+            turtle.image = 'player1dead'
+            game_active = 0
+            reset_turtle()
+            reset_oil()
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
@@ -145,6 +154,22 @@ def update_sharknet():
         reset_net()
         count+=1
 
+
+def reset_oil1():
+    oil1.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_oil2():
+    oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def update_oil():
+    global count
+    oil1.x -= SPEED+2
+    oil2.x -= SPEED+1
+    if oil1.right < 0:
+        reset_oil1()
+        count+=1
+        check_count()
+    if oil2.right < 0:
+        reset_oil2()
+        count+=1
 
 
 def reset_trash1():
@@ -197,3 +222,5 @@ def update():
         update_trash()
     elif game_level==2:
         update_sharknet()
+    elif game_level==3:
+        update_oil()
