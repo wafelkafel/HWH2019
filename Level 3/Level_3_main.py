@@ -41,6 +41,7 @@ turtle.x = 75
 def on_key_down():
     global game_active
     global count
+    global SPEED
     if not turtle.dead:
         if keyboard.up:
             turtle.y -= VELOCITY
@@ -52,10 +53,12 @@ def on_key_down():
             turtle.x += VELOCITY
     if keyboard.space:
         game_active = True
+        SPEED=3
         turtle.dead = False
         reset_turtle()
     if keyboard.escape:
         game_active = False
+        SPEED=0
         count=0
 
 
@@ -63,6 +66,7 @@ def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
+
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
