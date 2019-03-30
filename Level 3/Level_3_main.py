@@ -18,7 +18,7 @@ trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
 trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
-
+shark = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
 
 
 # Initial state of the turtle
@@ -42,7 +42,8 @@ def draw():
             trash5.draw()
             turtle.draw()
         elif game_level == 2:
-            x = 0
+            screen.blit('ocean1', (0, 0))
+            shark.draw()
 
         elif game_level == 3:
             x = 0
@@ -118,6 +119,12 @@ def reset_trash4():
 def reset_trash5():
     trash5.pos = (WIDTH, random.randint(40,HEIGHT-40))
 
+def check_count():
+    global count
+    if count >= 50:
+        count = 0
+        game_level = game_level + 1
+
 
 def update_trash():
     global count
@@ -130,7 +137,7 @@ def update_trash():
     if trash1.right < 0:
         reset_trash1()
         count+=1
-
+        check_count()
     if trash2.right < 0:
         reset_trash2()
         count+=1
@@ -152,7 +159,7 @@ def reset_all():
     reset_trash2()
     reset_trash3()
     reset_trash4()
-    reset_trash5
+    reset_trash5()
 
 
 def update():
