@@ -1,7 +1,7 @@
 import random
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 1000
+HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
 
@@ -77,7 +77,7 @@ def on_key_down():
 
 def update_turtle():
     global game_active
-    if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
+    if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
         turtle.image = 'player1dead'
         game_active = 0
         reset_turtle()
