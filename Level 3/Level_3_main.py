@@ -24,7 +24,7 @@ def draw():
         turtle.draw()
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
-    else:
+    elif game_active==0:
         screen.fill((0,0,0))
         screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
 
