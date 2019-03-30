@@ -141,19 +141,19 @@ def update_trash():
     if trash2.right < 0:
         reset_trash2()
         count+=1
-
+        check_count()
     if trash3.right < 0:
         reset_trash3()
         count+=1
-
+        check_count()
     if trash4.right < 0:
         reset_trash4()
         count+=1
-
+        check_count()
     if trash5.right < 0:
         reset_trash5()
         count+=1
-
+        check_count()
 def reset_all():
     reset_trash1()
     reset_trash2()
