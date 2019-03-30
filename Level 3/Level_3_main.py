@@ -151,6 +151,7 @@ def update_trash():
     if trash2.right < 0:
         reset_trash2()
         count+=1
+<<<<<<< HEAD
     if trash3.right < 0:
         reset_trash3()
         count+=1
@@ -162,6 +163,22 @@ def update_trash():
         count+=1
 
 def reset_trash():
+=======
+        check_count()
+    if trash3.right < 0:
+        reset_trash3()
+        count+=1
+        check_count()
+    if trash4.right < 0:
+        reset_trash4()
+        count+=1
+        check_count()
+    if trash5.right < 0:
+        reset_trash5()
+        count+=1
+        check_count()
+def reset_all():
+>>>>>>> e63b098fd3d3cd506744d8a48989f61b1cd64bcc
     reset_trash1()
     reset_trash2()
     reset_trash3()
