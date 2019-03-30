@@ -14,6 +14,10 @@ trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 game_active = False
 game_level = 1
 
+def blackscreen():
+    screen.fill((0,0,0))
+    screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+
 def draw():
     global game_active
     if game_active:
@@ -26,8 +30,9 @@ def draw():
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
     elif game_active==0:
-        screen.fill((0,0,0))
-        screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+        #screen.fill((0,0,0))
+        #screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+        blackscreen()
 
 
 
@@ -67,6 +72,10 @@ def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
+        #clock.schedule(blackscreen, 1.0)
+        global game_active
+        game_active = 0
+        reset_turtle()
 
     if not 0 < turtle.top:
         turtle.top=1
@@ -82,7 +91,7 @@ def update_turtle():
 def reset_turtle():
     turtle.pos = (75, HEIGHT//2)
     turtle.image = 'player1'
-    turtle.dead=False
+    turtle.dead = False
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
