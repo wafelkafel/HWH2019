@@ -5,12 +5,11 @@ HEIGHT = 600
 SPEED = 3
 VELOCITY = 40
 
-turtle = Actor('player1', (75, HEIGHT//2))
-trash1 = Actor('sixpackrings', anchor=('center', 'center'))
-trash2 = Actor('straw', anchor=('center', 'center'))
-trash3 = Actor('plasticbag', anchor=('center', 'center'))
-trash4 = Actor('plasticbottle', anchor=('center', 'center'))
-count = 0
+turtle = Actor('player1',       (75, HEIGHT//2) )
+trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
+trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
+trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
+trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 
 game_active = False
 game_level = 1
@@ -27,7 +26,12 @@ def draw():
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
     else:
         screen.fill((0,0,0))
-        screen.draw.text("Press space to play a game!", (300, 300), fontsize=32)
+        screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+
+
+
+
+count=0
 
 # Initial state of the bird
 turtle.dead = False
@@ -36,6 +40,8 @@ turtle.x = 75
 
 def on_key_down():
     global game_active
+    global count
+    global SPEED
     if not turtle.dead:
         if keyboard.up:
             turtle.y -= VELOCITY
@@ -47,10 +53,13 @@ def on_key_down():
             turtle.x += VELOCITY
     if keyboard.space:
         game_active = True
+        SPEED=3
         turtle.dead = False
         reset_turtle()
     if keyboard.escape:
         game_active = False
+        SPEED=0
+        count=0
 
 
 def update_turtle():
@@ -110,6 +119,15 @@ def update_trash():
         reset_trash4()
         count+=1
 
+def update_speed():
+    global count
+    global SPEED
+    if (count % 20 == 0) & (count!=0):
+        SPEED=2+SPEED
+
 def update():
     update_trash()
     update_turtle()
+    update_speed()
+    global SPEED
+    print(str(SPEED))
