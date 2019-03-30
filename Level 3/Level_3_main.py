@@ -12,8 +12,6 @@ trash3 = Actor('plasticbag', anchor=('center', 'center'))
 trash4 = Actor('plasticbottle', anchor=('center', 'center'))
 
 
-
-
 def draw():
     screen.blit('ocean1', (0, 0))
     trash1.draw()
@@ -91,3 +89,4 @@ def update():
     update_turtle()
 
     print(str(turtle.x) +"  " + str(turtle.y))
+
