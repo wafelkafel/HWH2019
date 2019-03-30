@@ -60,8 +60,9 @@ def on_key_down():
     if keyboard.space:
         game_active = True
         SPEED=3
-        turtle.dead = False
-        reset_turtle()
+        if turtle.dead:
+            turtle.dead = False
+            reset_turtle()
     if keyboard.escape:
         game_active = False
         SPEED=0
@@ -70,12 +71,13 @@ def on_key_down():
 
 def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
-        turtle.dead = True
+
         turtle.image = 'player1dead'
-        #clock.schedule(blackscreen, 1.0)
+        #clock.schedule_unique(blackscreen, 1.0)
         global game_active
         game_active = 0
         reset_turtle()
+        reset_all()
 
     if not 0 < turtle.top:
         turtle.top=1
@@ -131,6 +133,12 @@ def update_trash():
     if trash4.right < 0:
         reset_trash4()
         count+=1
+
+def reset_all():
+    reset_trash1()
+    reset_trash2()
+    reset_trash3()
+    reset_trash4()
 
 def update_speed():
     global count
