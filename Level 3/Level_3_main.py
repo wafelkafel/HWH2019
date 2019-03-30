@@ -20,6 +20,7 @@ def draw():
     trash4.draw()
     turtle.draw()
     screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
+>>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
 
 # Initial state of the bird
 turtle.dead = False
@@ -27,19 +28,9 @@ turtle.x = 75
 
 
 def on_key_down():
-    gameactive=1
-    if keyboard.up:
-        turtle.y -= VELOCITY
-    if keyboard.down:
-        turtle.y += VELOCITY
-    if keyboard.left:
-        turtle.x -= VELOCITY
-    if keyboard.right:
-        turtle.x += VELOCITY
 
 
 def update_turtle():
-
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
@@ -53,6 +44,7 @@ def update_turtle():
         turtle.left=1
     elif not turtle.right < WIDTH:
         turtle.right=WIDTH
+>>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -102,6 +94,14 @@ def update_speed():
 def update():
     update_trash()
     update_turtle()
+<<<<<<< HEAD
     update_speed()
     global SPEED
     print(str(SPEED))
+=======
+<<<<<<< HEAD
+=======
+
+    print(str(turtle.x) +"  " + str(turtle.y))
+>>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
+>>>>>>> 4b08b203c9c89a6d2fe7e1e8f8edb57f9ebab29e
