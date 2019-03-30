@@ -154,17 +154,7 @@ def reset_all():
     reset_trash4()
     reset_trash5
 
-def update_speed():
-    global check
-    global count
-    global SPEED
-    if (count % 10 == 0) & (count!=0) & check==0:
-        check=1
-        SPEED=1.03*SPEED
 
 def update():
     update_trash()
     update_turtle()
-    update_speed()
-    global SPEED
-    print(str(SPEED))
