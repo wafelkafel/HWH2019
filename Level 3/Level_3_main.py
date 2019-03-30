@@ -5,6 +5,11 @@ HEIGHT = 480
 WIDTH = 852
 SPEED = 4
 
+
+
+#actors
+
+turtle = Actor('turtle1',HEIGHT//2
 def draw():
     screen.blit('background', (0, 0))
 
