@@ -19,16 +19,11 @@ trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
 trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
 
-<<<<<<< HEAD
 
-game_active = False
-game_level = 1
-check=0
-=======
+
 # Initial state of the turtle
 turtle.dead = False
 turtle.x = 75
->>>>>>> a98e0f40476dc3af9ffc1575facd2b1d71a212e5
 
 def blackscreen():
     screen.fill((0,0,0))
@@ -37,7 +32,6 @@ def blackscreen():
 def draw():
     global game_active
     global game_level
-
     if game_active:
         if game_level == 1:
             screen.blit('ocean1', (0, 0))
@@ -49,6 +43,7 @@ def draw():
             turtle.draw()
         elif game_level == 2:
             x = 0
+
         elif game_level == 3:
             x = 0
         elif game_level == 4:
