@@ -5,25 +5,22 @@ HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
 
-count=0
-
-
-
-game_active = False
-game_level = 1
-
 turtle = Actor('player1',       (75, HEIGHT//2) )
 trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
 trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
 trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
-shark = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
-
+shark1 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
+shark2 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
+net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))))
 
 # Initial state of the turtle
 turtle.dead = False
 turtle.x = 75
+count=0
+game_active = False
+game_level = 1
 
 def blackscreen():
     screen.fill((0,0,0))
@@ -42,8 +39,11 @@ def draw():
             trash5.draw()
             turtle.draw()
         elif game_level == 2:
-            screen.blit('ocean1', (0, 0))
-            shark.draw()
+            screen.blit('coralreef', (0, 0))
+            shark1.draw()
+            shark2.draw()
+            net.draw()
+            turtle.draw()
 
         elif game_level == 3:
             x = 0
@@ -163,5 +163,6 @@ def reset_all():
 
 
 def update():
+
     update_trash()
     update_turtle()
