@@ -1,7 +1,7 @@
 import random
 
-WIDTH = 1000
-HEIGHT = 800
+WIDTH = 800
+HEIGHT = 600
 SPEED = 3
 VELOCITY = 40
 
