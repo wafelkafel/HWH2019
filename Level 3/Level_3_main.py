@@ -5,14 +5,15 @@ HEIGHT = 600
 SPEED = 3
 VELOCITY = 40
 
-<<<<<<< HEAD
 turtle = Actor('player1', (75, HEIGHT//2))
 trash1 = Actor('sixpackrings', anchor=('center', 'center'))
 trash2 = Actor('straw', anchor=('center', 'center'))
 trash3 = Actor('plasticbag', anchor=('center', 'center'))
 trash4 = Actor('plasticbottle', anchor=('center', 'center'))
+count = 0
 
 game_active = False
+game_level = 1
 
 def draw():
     global game_active
@@ -23,27 +24,10 @@ def draw():
         trash3.draw()
         trash4.draw()
         turtle.draw()
+        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
     else:
         screen.fill((0,0,0))
         screen.draw.text("Press space to play a game!", (300, 300), fontsize=32)
-
-=======
-turtle = Actor('player1',       (75, HEIGHT//2) )
-trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )   ))
-trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )  ))
-trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  ) ))
-trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )  ))
-count=0
-
-def draw():
-    screen.blit('ocean1', (0, 0))
-    trash1.draw()
-    trash2.draw()
-    trash3.draw()
-    trash4.draw()
-    turtle.draw()
-    screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
 
 # Initial state of the bird
 turtle.dead = False
@@ -73,22 +57,19 @@ def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
-
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
         turtle.bottom=HEIGHT-1
-
-<<<<<<< HEAD
-def reset_turtle():
-    turtle.pos = (turtle.x, 300)
-    turtle.image = 'player1'
-=======
     if not 0 < turtle.left:
         turtle.left=1
     elif not turtle.right < WIDTH:
         turtle.right=WIDTH
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
+
+
+def reset_turtle():
+    turtle.pos = (turtle.x, 300)
+    turtle.image = 'player1'
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -132,8 +113,3 @@ def update_trash():
 def update():
     update_trash()
     update_turtle()
-<<<<<<< HEAD
-=======
-
-    print(str(turtle.x) +"  " + str(turtle.y))
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
