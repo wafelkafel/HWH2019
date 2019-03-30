@@ -2,14 +2,14 @@ import random
 
 WIDTH = 800
 HEIGHT = 600
-SPEED = 3
+SPEED = 30
 VELOCITY = 40
 
 turtle = Actor('player1',       (75, HEIGHT//2) )
-trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )   ))
-trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )  ))
-trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  ) ))
-trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )  ))
+trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
+trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
+trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
+trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 count=0
 
 def draw():
@@ -93,8 +93,15 @@ def update_trash():
         reset_trash4()
         count+=1
 
+def update_speed():
+    global count
+    global SPEED
+    if (count % 20 == 0) & (count!=0):
+        SPEED=2+SPEED
+
 def update():
     update_trash()
     update_turtle()
-
-    print(str(turtle.x) +"  " + str(turtle.y))
+    update_speed()
+    global SPEED
+    print(str(SPEED))
