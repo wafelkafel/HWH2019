@@ -11,8 +11,10 @@ trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
 trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
 
+
 game_active = False
 game_level = 1
+check=0
 
 def blackscreen():
     screen.fill((0,0,0))
@@ -141,9 +143,11 @@ def reset_all():
     reset_trash4()
 
 def update_speed():
+    global check
     global count
     global SPEED
-    if (count % 20 == 0) & (count!=0):
+    if (count % 10 == 0) & (count!=0) & check==0:
+        check=1
         SPEED=1.03*SPEED
 
 def update():
