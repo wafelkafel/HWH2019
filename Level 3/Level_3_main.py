@@ -99,15 +99,13 @@ def update_turtle():
             reset_trash()
     elif game_level==2
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
-                turtle.image = 'player1dead'
-                game_active = 0
-                reset_turtle()
-                reset_all()
+            turtle.image = 'player1dead'
+            game_active = 0
+            reset_turtle()
+            reset_sharknet()
 
 
-
-
- if not 0 < turtle.top:
+    if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
         turtle.bottom=HEIGHT-1
@@ -151,7 +149,6 @@ def update_trash():
     if trash2.right < 0:
         reset_trash2()
         count+=1
-<<<<<<< HEAD
     if trash3.right < 0:
         reset_trash3()
         count+=1
@@ -163,22 +160,6 @@ def update_trash():
         count+=1
 
 def reset_trash():
-=======
-        check_count()
-    if trash3.right < 0:
-        reset_trash3()
-        count+=1
-        check_count()
-    if trash4.right < 0:
-        reset_trash4()
-        count+=1
-        check_count()
-    if trash5.right < 0:
-        reset_trash5()
-        count+=1
-        check_count()
-def reset_all():
->>>>>>> e63b098fd3d3cd506744d8a48989f61b1cd64bcc
     reset_trash1()
     reset_trash2()
     reset_trash3()
