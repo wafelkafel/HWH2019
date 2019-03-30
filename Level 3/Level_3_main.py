@@ -2,7 +2,7 @@ import random
 
 WIDTH = 800
 HEIGHT = 600
-SPEED = 30
+SPEED = 3
 VELOCITY = 40
 
 turtle = Actor('player1',       (75, HEIGHT//2) )
@@ -10,17 +10,28 @@ trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
 trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
 trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
 trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
-count=0
+
+game_active = False
 
 def draw():
-    screen.blit('ocean1', (0, 0))
-    trash1.draw()
-    trash2.draw()
-    trash3.draw()
-    trash4.draw()
-    turtle.draw()
-    screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
+    global game_active
+    if game_active:
+        screen.blit('ocean1', (0, 0))
+        trash1.draw()
+        trash2.draw()
+        trash3.draw()
+        trash4.draw()
+        turtle.draw()
+        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
+
+    else:
+        screen.fill((0,0,0))
+        screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+
+
+
+count=0
+
 
 # Initial state of the bird
 turtle.dead = False
@@ -28,23 +39,42 @@ turtle.x = 75
 
 
 def on_key_down():
+    global game_active
+    global count
+    if not turtle.dead:
+        if keyboard.up:
+            turtle.y -= VELOCITY
+        if keyboard.down:
+            turtle.y += VELOCITY
+        if keyboard.left:
+            turtle.x -= VELOCITY
+        if keyboard.right:
+            turtle.x += VELOCITY
+    if keyboard.space:
+        game_active = True
+        turtle.dead = False
+        reset_turtle()
+    if keyboard.escape:
+        game_active = False
+        count=0
 
 
 def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
-
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
         turtle.bottom=HEIGHT-1
-
     if not 0 < turtle.left:
         turtle.left=1
     elif not turtle.right < WIDTH:
         turtle.right=WIDTH
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
+
+def reset_turtle():
+    turtle.pos = (turtle.x, 300)
+    turtle.image = 'player1'
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -94,14 +124,6 @@ def update_speed():
 def update():
     update_trash()
     update_turtle()
-<<<<<<< HEAD
     update_speed()
     global SPEED
     print(str(SPEED))
-=======
-<<<<<<< HEAD
-=======
-
-    print(str(turtle.x) +"  " + str(turtle.y))
->>>>>>> 49b353bf7825b66947dc3db63c707e17c8c36f13
->>>>>>> 4b08b203c9c89a6d2fe7e1e8f8edb57f9ebab29e
