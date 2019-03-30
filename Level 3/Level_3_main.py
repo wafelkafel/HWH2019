@@ -9,7 +9,7 @@ SPEED = 4
 
 #actors
 turtle = Actor('ship', (HEIGHT//2, 30))
-trash_stra=
+trash_straw = Actor(
 
 def draw():
     screen.blit('background_level_3', (0, 0))
