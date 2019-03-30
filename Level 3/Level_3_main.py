@@ -22,6 +22,7 @@ count=0
 game_active = False
 game_level = 1
 
+
 def blackscreen():
     screen.fill((0,0,0))
     screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
@@ -124,7 +125,6 @@ def check_count():
     if count >= 5:
         count = 0
         game_level = game_level + 1
-
 
 def update_trash():
     global count
