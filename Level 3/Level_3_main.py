@@ -54,6 +54,17 @@ def draw():
     elif game_active == False:
         blackscreen()
 
+
+
+def check_count():
+    global count
+    global game_level
+    if count >= 5:
+        count = 0
+        game_level = game_level + 1
+
+
+
 def on_key_down():
     global game_active
     global count
@@ -81,16 +92,26 @@ def on_key_down():
 
 def update_turtle():
     global game_active
-    if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
-        turtle.image = 'player1dead'
-        game_active = 0
-        reset_turtle()
-        reset_all()
-    if not 0 < turtle.top:
+    if game_level==1:
+        if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
+            turtle.image = 'player1dead'
+            game_active = 0
+            reset_turtle()
+            reset_trash()
+    elif game_level==2
+        if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
+                turtle.image = 'player1dead'
+                game_active = 0
+                reset_turtle()
+                reset_all()
+
+
+
+
+ if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
         turtle.bottom=HEIGHT-1
-
     if not 0 < turtle.left:
         turtle.left=1
     elif not turtle.right < WIDTH:
@@ -102,29 +123,19 @@ def reset_turtle():
     turtle.image = 'player1'
     turtle.dead = False
 
+
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
-
-
 def reset_trash2():
     trash2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-
-
 def reset_trash3():
     trash3.pos = (WIDTH, random.randint(40,HEIGHT-40))
-
-
 def reset_trash4():
     trash4.pos = (WIDTH, random.randint(40,HEIGHT-40))
-
 def reset_trash5():
     trash5.pos = (WIDTH, random.randint(40,HEIGHT-40))
 
-def check_count():
-    global count
-    if count >= 5:
-        count = 0
-        game_level = game_level + 1
+
 
 def update_trash():
     global count
@@ -133,7 +144,6 @@ def update_trash():
     trash3.x -= SPEED-1
     trash4.x -= SPEED+0.5
     trash5.x -= SPEED-0.5
-
     if trash1.right < 0:
         reset_trash1()
         count+=1
@@ -141,6 +151,19 @@ def update_trash():
     if trash2.right < 0:
         reset_trash2()
         count+=1
+<<<<<<< HEAD
+    if trash3.right < 0:
+        reset_trash3()
+        count+=1
+    if trash4.right < 0:
+        reset_trash4()
+        count+=1
+    if trash5.right < 0:
+        reset_trash5()
+        count+=1
+
+def reset_trash():
+=======
         check_count()
     if trash3.right < 0:
         reset_trash3()
@@ -155,6 +178,7 @@ def update_trash():
         count+=1
         check_count()
 def reset_all():
+>>>>>>> e63b098fd3d3cd506744d8a48989f61b1cd64bcc
     reset_trash1()
     reset_trash2()
     reset_trash3()
@@ -163,6 +187,10 @@ def reset_all():
 
 
 def update():
+   global game_level
+   update_turtle()
+   if game_level==1:
+        update_trash()
+    elif game_level==2:
+        update_sharknet()
 
-    update_trash()
-    update_turtle()
