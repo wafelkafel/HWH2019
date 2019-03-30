@@ -132,7 +132,21 @@ def reset_sharknet():
     reset_shark2()
     reset_net()
 
-
+def update_sharknet():
+    global count
+    shark1.x -= SPEED+2
+    shark2.x -= SPEED+1
+    net.x -= SPEED-1
+    if shark1.right < 0:
+        reset_shark1()
+        count+=1
+        check_count()
+    if shark2.right < 0:
+        reset_shark2()
+        count+=1
+    if net.right < 0:
+        reset_net()
+        count+=1
 
 
 
@@ -152,9 +166,6 @@ def reset_trash():
     reset_trash3()
     reset_trash4()
     reset_trash5()
-
-
-
 def update_trash():
     global count
     trash1.x -= SPEED+1
@@ -183,9 +194,9 @@ def update_trash():
 
 
 def update():
-   global game_level
-   update_turtle()
-   if game_level==1:
+    global game_level
+    update_turtle()
+    if game_level==1:
         update_trash()
     elif game_level==2:
         update_sharknet()
