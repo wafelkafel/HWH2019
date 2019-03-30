@@ -1,21 +1,19 @@
 import random
 
 #Basics
-HEIGHT = 480
-WIDTH = 852
+HEIGHT = 300
+WIDTH = 300
 SPEED = 4
 
 
 
 #actors
-
-turtle = Actor('turtle1', (HEIGHT//2, 30))
+turtle = Actor('ship', (HEIGHT//2, 30))
+trash_stra=
 
 def draw():
-    screen.blit('background', (0, 0))
+    screen.blit('background_level_3', (0, 0))
 
-
-DVDFBDGBDBD
 
 
 def update():
