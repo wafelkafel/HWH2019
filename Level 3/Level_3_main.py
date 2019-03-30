@@ -15,5 +15,7 @@ def draw():
     screen.blit('background', (0, 0))
 
 
+DVDFBDGBDBD
+
 
 def update():
