@@ -121,7 +121,7 @@ def reset_trash5():
 
 def check_count():
     global count
-    if count >= 50:
+    if count >= 5:
         count = 0
         game_level = game_level + 1
 
