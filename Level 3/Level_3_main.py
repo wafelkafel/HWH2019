@@ -41,7 +41,6 @@ def on_key_down():
 
 def update_turtle():
 
-
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
@@ -50,6 +49,11 @@ def update_turtle():
         turtle.y=HEIGHT-1
     elif not turtle.y < HEIGHT:
         turtle.y=1
+
+    if not 0 < turtle.y:
+        turtle.y=1
+    elif not turtle.y < WIDTH:
+        turtle.y=WIDTH-1
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -86,3 +90,4 @@ def update():
     update_trash()
     update_turtle()
 
+    print(str(turtle.x) +"  " + str(turtle.y))
