@@ -5,13 +5,6 @@ HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
 
-count=0
-
-
-
-game_active = False
-game_level = 1
-
 turtle = Actor('player1',       (75, HEIGHT//2) )
 trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
 trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
@@ -25,6 +18,9 @@ net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))))
 # Initial state of the turtle
 turtle.dead = False
 turtle.x = 75
+count=0
+game_active = False
+game_level = 1
 
 def blackscreen():
     screen.fill((0,0,0))
