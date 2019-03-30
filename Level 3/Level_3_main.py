@@ -12,8 +12,6 @@ trash3 = Actor('plasticbag', anchor=('center', 'center'))
 trash4 = Actor('plasticbottle', anchor=('center', 'center'))
 
 
-
-
 def draw():
     screen.blit('ocean1', (0, 0))
     trash1.draw()
@@ -40,8 +38,6 @@ def on_key_down():
 
 
 def update_turtle():
-
-
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
@@ -85,4 +81,3 @@ def update_trash():
 def update():
     update_trash()
     update_turtle()
-
