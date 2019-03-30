@@ -67,10 +67,12 @@ def update_turtle():
     if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4):
         turtle.dead = True
         turtle.image = 'player1dead'
+
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
         turtle.bottom=HEIGHT-1
+
     if not 0 < turtle.left:
         turtle.left=1
     elif not turtle.right < WIDTH:
@@ -78,8 +80,9 @@ def update_turtle():
 
 
 def reset_turtle():
-    turtle.pos = (turtle.x, 300)
+    turtle.pos = (75, HEIGHT//2)
     turtle.image = 'player1'
+    turtle.dead=FALSE
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -124,7 +127,7 @@ def update_speed():
     global count
     global SPEED
     if (count % 20 == 0) & (count!=0):
-        SPEED=2+SPEED
+        SPEED=1.03*SPEED
 
 def update():
     update_trash()
