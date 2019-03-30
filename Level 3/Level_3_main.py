@@ -82,7 +82,7 @@ def update_turtle():
 def reset_turtle():
     turtle.pos = (75, HEIGHT//2)
     turtle.image = 'player1'
-    turtle.dead=FALSE
+    turtle.dead=False
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
