@@ -5,12 +5,12 @@ HEIGHT = 600
 SPEED = 3
 VELOCITY = 40
 
-turtle = Actor('player1', (75, HEIGHT//2))
-trash1 = Actor('sixpackrings', anchor=('center', 'center'))
-trash2 = Actor('straw', anchor=('center', 'center'))
-trash3 = Actor('plasticbag', anchor=('center', 'center'))
-trash4 = Actor('plasticbottle', anchor=('center', 'center'))
-
+turtle = Actor('player1',       (75, HEIGHT//2) )
+trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )   ))
+trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )  ))
+trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  ) ))
+trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )  ))
+count=0
 
 def draw():
     screen.blit('ocean1', (0, 0))
@@ -19,11 +19,12 @@ def draw():
     trash3.draw()
     trash4.draw()
     turtle.draw()
-
+    screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
 # Initial state of the bird
 turtle.dead = False
 turtle.x = 75
+
 
 def on_key_down():
     gameactive=1
@@ -56,33 +57,41 @@ def update_turtle():
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
 
+
 def reset_trash2():
     trash2.pos = (WIDTH, random.randint(40,HEIGHT-40))
+
 
 def reset_trash3():
     trash3.pos = (WIDTH, random.randint(40,HEIGHT-40))
 
+
 def reset_trash4():
     trash4.pos = (WIDTH, random.randint(40,HEIGHT-40))
 
+
 def update_trash():
-    trash1.left -= SPEED+1
-    trash2.left -= SPEED-1
-    trash3.left -= SPEED
-    trash4.left -= SPEED-0.5
+    global count
+    trash1.x -= SPEED+1
+    trash2.x -= SPEED
+    trash3.x -= SPEED-1
+    trash4.x -= SPEED+0.5
 
     if trash1.right < 0:
         reset_trash1()
+        count+=1
 
     if trash2.right < 0:
         reset_trash2()
+        count+=1
 
     if trash3.right < 0:
         reset_trash3()
+        count+=1
 
     if trash4.right < 0:
         reset_trash4()
-
+        count+=1
 
 def update():
     update_trash()
