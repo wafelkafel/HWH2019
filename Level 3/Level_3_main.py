@@ -103,8 +103,6 @@ def update_turtle():
             game_active = 0
             reset_turtle()
             reset_sharknet()
-
-
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
@@ -131,7 +129,6 @@ def reset_sharknet():
     reset_shark1()
     reset_shark2()
     reset_net()
-
 def update_sharknet():
     global count
     shark1.x -= SPEED+2
