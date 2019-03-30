@@ -22,6 +22,7 @@ count=0
 game_active = False
 game_level = 1
 
+
 def blackscreen():
     screen.fill((0,0,0))
     screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
@@ -131,7 +132,6 @@ def reset_trash4():
     trash4.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def reset_trash5():
     trash5.pos = (WIDTH, random.randint(40,HEIGHT-40))
-
 
 
 
