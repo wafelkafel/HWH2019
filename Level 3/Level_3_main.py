@@ -97,7 +97,7 @@ def update_turtle():
             game_active = 0
             reset_turtle()
             reset_trash()
-    elif game_level==2
+    elif game_level==2:
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
             turtle.image = 'player1dead'
             game_active = 0
@@ -183,10 +183,9 @@ def update_trash():
 
 
 def update():
-   global game_level
-   update_turtle()
-   if game_level==1:
+    global game_level
+    update_turtle()
+    if game_level==1:
         update_trash()
     elif game_level==2:
         update_sharknet()
-
