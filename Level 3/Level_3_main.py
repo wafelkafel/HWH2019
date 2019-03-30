@@ -22,7 +22,6 @@ count=0
 game_active = False
 game_level = 1
 
-
 def blackscreen():
     screen.fill((0,0,0))
     screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
@@ -122,6 +121,21 @@ def reset_turtle():
     turtle.dead = False
 
 
+def reset_shark1():
+    shark1.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_shark2():
+    shark2.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_net():
+    net.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_sharknet():
+    reset_shark1()
+    reset_shark2()
+    reset_net()
+
+
+
+
+
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def reset_trash2():
@@ -132,6 +146,12 @@ def reset_trash4():
     trash4.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def reset_trash5():
     trash5.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_trash():
+    reset_trash1()
+    reset_trash2()
+    reset_trash3()
+    reset_trash4()
+    reset_trash5()
 
 
 
@@ -159,12 +179,7 @@ def update_trash():
         reset_trash5()
         count+=1
 
-def reset_trash():
-    reset_trash1()
-    reset_trash2()
-    reset_trash3()
-    reset_trash4()
-    reset_trash5()
+
 
 
 def update():
