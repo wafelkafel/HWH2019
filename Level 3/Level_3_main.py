@@ -43,15 +43,15 @@ def update_turtle():
         turtle.dead = True
         turtle.image = 'player1dead'
 
-    if not 0 < turtle.bottom:
-        turtle.top=HEIGHT-1
-    elif not turtle.top < HEIGHT:
-        turtle.bottom=1
+    if not 0 < turtle.top:
+        turtle.top=1
+    elif not turtle.bottom < HEIGHT:
+        turtle.bottom=HEIGHT-1
 
     if not 0 < turtle.left:
         turtle.left=1
-    elif not turtle.left < WIDTH:
-        turtle.y=WIDTH
+    elif not turtle.right < WIDTH:
+        turtle.right=WIDTH
 
 def reset_trash1():
     trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
@@ -89,4 +89,3 @@ def update():
     update_turtle()
 
     print(str(turtle.x) +"  " + str(turtle.y))
-
