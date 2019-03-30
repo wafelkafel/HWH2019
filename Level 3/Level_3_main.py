@@ -39,7 +39,7 @@ def draw():
 
 count=0
 
-# Initial state of the bird
+# Initial state of the turtle
 turtle.dead = False
 turtle.x = 75
 
