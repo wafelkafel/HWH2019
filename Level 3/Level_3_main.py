@@ -15,10 +15,11 @@ def presstocontinue():
 def presstoexit():
     screen.draw.text("Press space to exit", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
-    screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    #screen.draw.text(fact, midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    fact()
     screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
-    facts=['100,000 marine mammals and turtles and 1 million sea birds are killed by marine plastic pollution annually.',
+    facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
     'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, 36% of seals and 40% of seabird species examined.',
     'Over 150 plastic bottles litter each mile of UK beaches.',
     'Approx 5,000 items of marine plastic pollution have been found per mile of beach in the UK.',
@@ -32,7 +33,7 @@ def fact():
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
     a=random.randint(0,11)
-    screen.draw.text(str(facts[a]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27)
+    screen.draw.text(str(facts[a]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
 class slide:
