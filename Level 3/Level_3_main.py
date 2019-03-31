@@ -48,8 +48,8 @@ slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening.\n \
 A coral reef that his species had lived in for thousands of years began to perish.\n He and his \
 family had to find a new home. However, there were some dangers on the way…',presstocontinue)
-slide3=slide('Sharks - turtles’ natural predators and shrimp nets used \n \
-by humans were the greatest dangers that on Toby’s way.',presstocontinue)
+slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \n \
+by humans were the greatest dangers that on Toby\'s way.',presstocontinue)
 slide4=slide('',presstoplay)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
@@ -67,11 +67,11 @@ slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
 slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans.\n \
 Make sure you support them at:\
-https://www.theoceancleanup.com/\
-https://plasticoceans.org/\
-https://4ocean.com/\
-https://www.5gyres.org/\
-https://oceana.org/',None)
+www.theoceancleanup.com/\
+www.plasticoceans.org/\
+www.4ocean.com/\
+www.5gyres.org/\
+www.oceana.org/',None)
 
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
 
