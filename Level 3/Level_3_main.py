@@ -165,9 +165,11 @@ def update_sharknet():
     if shark2.right < 0:
         reset_shark2()
         count+=1
+        check_count()
     if net.right < 0:
         reset_net()
         count+=1
+        check_count()
 
 
 def reset_oil1():
@@ -192,9 +194,11 @@ def update_oilbarrel():
     if oil2.right < 0:
         reset_oil2()
         count+=1
+        check_count()
     if barrel.right < 0:
         reset_barrel()
         count+=1
+        check_count()
 
 
 def reset_trash1():
@@ -227,15 +231,19 @@ def update_trash():
     if trash2.right < 0:
         reset_trash2()
         count+=1
+        check_count()
     if trash3.right < 0:
         reset_trash3()
         count+=1
+        check_count()
     if trash4.right < 0:
         reset_trash4()
         count+=1
+        check_count()
     if trash5.right < 0:
         reset_trash5()
         count+=1
+        check_count()
 
 
 
