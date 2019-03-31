@@ -5,7 +5,7 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
-TARGET = 10
+TARGET = 20
 
 
 #functions
