@@ -184,7 +184,15 @@ def reset_turtle():
 
 
 def reset_enemy(enemy):
-    enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
+    max_val = max(slides[i].enemies.x)
+    ind = list.index(max_val)
+    if random.randint(0,1):
+        enemy.pos = (WIDTH, random.randint(20,slides[i].enemies[ind].y - (slides[i].enemies[ind].height//2+enemy.height//2+slides[i].turtle.height)))
+    else:
+        enemy.pos = (WIDTH, random.randint(slides[i].enemies[ind].y + (slides[i].enemies[ind].height//2+enemy.height//2+slides[i].turtle.height),HEIGHT-20))
+
+
+
 
 
 def update_enemy(enemies):
