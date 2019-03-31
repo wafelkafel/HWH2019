@@ -146,7 +146,7 @@ def on_key_down():
             exit()
 
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12 or i==14):
+        if not (i == 4 or i== 8 or i==12 or i==14 or i==15):
             i+=1
         elif i==15:
             exit()
