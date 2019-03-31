@@ -71,7 +71,7 @@ plasticoceans.org\n\
 4ocean.com\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
-
+slide99=slide('', youlost)
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
 
 
@@ -99,9 +99,12 @@ def checkturtledead():
     global i
     global count
     if slides[i].turtle.dead:
-        i=99
+        clock.schedule_unique((make99),1)
         count=0
-
+def make99():
+    global i
+    temp=i
+    i=99
 
 def on_key_down():
     global i
@@ -115,21 +118,21 @@ def on_key_down():
                 slides[i].turtle.x -= VELOCITY
             if keyboard.right:
                 slides[i].turtle.x += VELOCITY
-  #  if slide == 99:
-   #     if keyboard.space:
-    #        reset_turtle()
-     #       if game_level==1:
-      #          slide=5
-       #         reset_sharknet()
-        #    elif game_level==2:
-         #       slide=9
-          #      reset_oilbarrel()
-           # elif game_level==3:
-            #    slide=13
-             #   reset_trash()
-         #   game_active = True
-       # if keyboard.escape:
-        #    exit()
+    if i == 99:
+        if keyboard.space:
+            reset_turtle()
+            if game_level==1:
+                slide=5
+                reset_sharknet()
+            elif game_level==2:
+                slide=9
+                reset_oilbarrel()
+            elif game_level==3:
+                slide=13
+                reset_trash()
+            game_active = True
+            if keyboard.escape:
+            exit()
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12):
             i+=1
@@ -147,7 +150,7 @@ def on_key_down():
 def update_turtle():
     global count
     global slides
-    if i==4:
+    if i==4 or i==12:
         for e in slides[i].enemies:
             if slides[i].turtle.colliderect(e):
                 slides[i].turtle.dead=True
@@ -159,12 +162,7 @@ def update_turtle():
                 slides[i].turtle.dead=True
                 slides[i].turtle.image = 'turtletopdead'
                 checkturtledead()
-    elif i==12:
-       for e in slides[i].enemies:
-            if slides[i].turtle.colliderect(e):
-                slides[i].turtle.dead=True
-                slides[i].turtle.image = 'player1dead'
-                checkturtledead()
+
 
     if not 0 < slides[i].turtle.top:
         slides[i].turtle.top=1
@@ -193,10 +191,6 @@ def reset_enemy(enemy,x):
     else:
         enemy.pos = (WIDTH, random.randint(y0+delta ,HEIGHT-20))
 
-
-
-
-
 def update_enemy(enemies):
     global count
     x=[0,0,0,0,0]
@@ -213,5 +207,6 @@ def update_enemy(enemies):
 def update():
     if i==4 or i==8 or i ==12:
         update_turtle()
-        checkturtledead()
         update_enemy(slides[i].enemies)
+
+    print(str(i))
