@@ -65,7 +65,6 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 # Initial state of the turtle
 i=0
 count=0
-dV=0
 #escape = False
 
 
@@ -169,7 +168,6 @@ def reset_turtle():
 
 def reset_enemy(enemy):
     enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
-    dV=random.seed(0,3)
 
 def update_enemy(enemies):
     global count
