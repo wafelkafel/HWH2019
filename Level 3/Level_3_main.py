@@ -145,10 +145,10 @@ def on_key_down():
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12):
             i+=1
-  #  if keyboard.escape:
-   #     game_active = False
-    #    SPEED=0
-     #   count=0
+    #if keyboard.escape:
+        #game_active = False
+        #SPEED=0
+        #count=0
 
 
 
