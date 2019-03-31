@@ -130,7 +130,7 @@ def on_key_down():
             exit()
 
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12 pr i==14):
+        if not (i == 4 or i== 8 or i==12 or i==14):
             i+=1
 
 def update_turtle():
@@ -148,7 +148,8 @@ def update_turtle():
                 slides[i].turtle.dead=True
                 slides[i].turtle.image = 'turtletopdead'
                 checkturtledead()
-    else if i==14
+
+
 
     if not 0 < slides[i].turtle.top:
         slides[i].turtle.top=1
@@ -192,7 +193,7 @@ def update_enemy(enemies):
 
 
 def update():
-    if i==4 or i==8 or i ==12:
+    if i==4 or i==8 or i ==12 or i==14:
         update_turtle()
         update_enemy(slides[i].enemies)
 
