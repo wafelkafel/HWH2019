@@ -100,7 +100,6 @@ def draw():
 
 
 
-
 def check_count():
     global count
     global game_level
