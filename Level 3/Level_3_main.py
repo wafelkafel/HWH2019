@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 WIDTH = 1000
 HEIGHT = 800
@@ -183,13 +184,14 @@ def reset_turtle():
     slides[i].turtle.dead = False
 
 
-def reset_enemy(enemy):
-    max_val = max(slides[i].enemies.x)
-    ind = list.index(max_val)
-    if random.randint(0,1):
-        enemy.pos = (WIDTH, random.randint(20,slides[i].enemies[ind].y - (slides[i].enemies[ind].height//2+enemy.height//2+slides[i].turtle.height)))
+def reset_enemy(enemy,x):
+    ind = np.argmax(x)
+    y0  = slides[i].enemies[ind].y
+    delta = ((slides[i].enemies[ind].height)//2)+((enemy.height)//2)+(slides[i].turtle.height)
+    if ((y0-delta)-20 > (HEIGHT-20-(y0+delta))):
+        enemy.pos = (WIDTH, random.randint(20,y0 - delta))
     else:
-        enemy.pos = (WIDTH, random.randint(slides[i].enemies[ind].y + (slides[i].enemies[ind].height//2+enemy.height//2+slides[i].turtle.height),HEIGHT-20))
+        enemy.pos = (WIDTH, random.randint(y0+delta ,HEIGHT-20))
 
 
 
@@ -197,11 +199,13 @@ def reset_enemy(enemy):
 
 def update_enemy(enemies):
     global count
+    x=[0,0,0,0,0]
     for e in enemies:
         e.x -= SPEED+enemies.index(e)
+        x[enemies.index(e)]=e.x
     for e in enemies:
         if e.right < 0:
-            reset_enemy(e)
+            reset_enemy(e,x)
             count+=1
             check_count()
 
