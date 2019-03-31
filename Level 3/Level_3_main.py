@@ -8,7 +8,7 @@ TARGET = 5
 
 #functions
 def presstoplay():
-    screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
 def presstocontinue():
     screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
@@ -45,7 +45,9 @@ class level:
         screen.draw.text(count, midtop=(WIDTH-50, HEIGHT-100), color='white',fontsize=26)
 
 slide1=slide('Year 2005',presstocontinue)
-slide2=slide('First bunch of text',presstocontinue)
+slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. \
+A coral reef that his species had lived in for thousands of years began to perish. He and his \
+family had to find a new home. However, there were some dangers on the way…',presstocontinue)
 slide3=slide('Second bunch of text',presstocontinue)
 slide4=slide('',presstoplay)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
@@ -120,6 +122,10 @@ def on_key_down():
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12):
             i+=1
+    #if keyboard.escape:
+        #game_active = False
+        #SPEED=0
+        #count=0
   #  if keyboard.escape:
    #     game_active = False
     #    SPEED=0
