@@ -4,7 +4,7 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
-TARGET = 5
+TARGET = 10
 
 #functions
 def presstoplay():
@@ -65,6 +65,7 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 # Initial state of the turtle
 i=0
 count=0
+dV=0
 #escape = False
 
 
@@ -167,13 +168,14 @@ def reset_turtle():
 
 
 def reset_enemy(enemy):
+    global dV
     enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
-    #dV=random.randint(0,3)
+    dV=random.seed(0,3)
 
 def update_enemy(enemies):
     global count
     for e in enemies:
-        e.x -= SPEED #+dV
+        e.x -= SPEED +dV
     for e in enemies:
         if e.right < 0:
             reset_enemy(e)
@@ -187,5 +189,3 @@ def update():
         update_turtle()
         checkturtledead()
         update_enemy(slides[i].enemies)
-
-    print(str(count))
