@@ -42,6 +42,7 @@ class level:
         self.turtle.draw()
         for e in self.enemies:
             e.draw()
+        screen.draw.text(count, midtop=(WIDTH-50, HEIGHT-100), color='white',fontsize=26)
 
 slide1=slide('Year 2005',presstocontinue)
 slide2=slide('First bunch of text',presstocontinue)
