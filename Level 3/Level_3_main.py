@@ -4,11 +4,11 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
-TARGET = 5
+TARGET = 10
 
 #functions
 def presstoplay():
-    screen.draw.text("Press space to play", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
 def presstocontinue():
     screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
@@ -42,6 +42,7 @@ class level:
         self.turtle.draw()
         for e in self.enemies:
             e.draw()
+        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
 slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening.\n \
@@ -49,6 +50,8 @@ A coral reef that his species had lived in for thousands of years began to peris
 family had to find a new home. However, there were some dangers on the way…',presstocontinue)
 slide3=slide('Sharks - turtles’ natural predators and shrimp nets used \n \
 by humans were the greatest dangers that on Toby’s way.',presstocontinue)
+slide2=slide('First bunch of text',presstocontinue)
+slide3=slide('Second bunch of text',presstocontinue)
 slide4=slide('',presstoplay)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
@@ -70,6 +73,7 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 # Initial state of the turtle
 i=0
 count=0
+dV=0
 #escape = False
 
 
@@ -78,7 +82,6 @@ count=0
 def draw():
     global i
     slides[i].draw()
-    print(i)
 
 def check_count():
     global count
@@ -125,10 +128,6 @@ def on_key_down():
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12):
             i+=1
-    #if keyboard.escape:
-        #game_active = False
-        #SPEED=0
-        #count=0
   #  if keyboard.escape:
    #     game_active = False
     #    SPEED=0
@@ -177,13 +176,14 @@ def reset_turtle():
 
 
 def reset_enemy(enemy):
+    global dV
     enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
-    #dV=random.randint(0,3)
+    dV=random.seed(0,3)
 
 def update_enemy(enemies):
     global count
     for e in enemies:
-        e.x -= SPEED #+dV
+        e.x -= SPEED +dV
     for e in enemies:
         if e.right < 0:
             reset_enemy(e)
@@ -197,4 +197,3 @@ def update():
         update_turtle()
         checkturtledead()
         update_enemy(slides[i].enemies)
-    print(str(i))
