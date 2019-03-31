@@ -110,7 +110,7 @@ def update_turtle():
             turtle.image = 'player1dead'
             game_active = 0
             reset_turtle()
-            reset_oil()
+            reset_oilbarrel()
     elif game_level==3:
         if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
             turtle.image = 'player1dead'
