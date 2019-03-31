@@ -4,6 +4,7 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
+TARGET = 1
 
 turtle = Actor('player1',       (75, HEIGHT//2) )
 shark1 = Actor('shark1', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
@@ -24,28 +25,18 @@ turtle.x = 75
 count=0
 game_active = False
 game_level = 1
-
-def fact():
-    facts=['100,000 marine mammals and turtles and 1 million sea birds are killed by marine plastic pollution annually.',
-    'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, 36% of seals and 40% of seabird species examined.',
-    'Over 150 plastic bottles litter each mile of UK beaches.',
-    'Approx 5,000 items of marine plastic pollution have been found per mile of beach in the UK.',
-    'Plastics consistently make up 60 to 90% of all marine debris studied.',
-    'There may now be around 5.25 trillion macro and microplastic pieces floating in the open ocean. Weighing up to 269,000 tonnes.',
-    'Every day approximately 8 million pieces of plastic pollution find their way into our oceans.',
-    'Scientists have recently discovered microplastics embedded deep in the Arctic ice.',
-    'Every minute, one garbage truck of plastic is dumped into our oceans.',
-    'By 2050 there will be more plastic in the oceans than there are fish (by weight).',
-    'There is more microplastic in the ocean than there are stars in the Milky Way.',
-    'More than 50 percent of sea turtles have consumed plastic.']
-    screen.fill((0,0,0))
-    a=random.randint(0,11)
-    screen.draw.text(str(facts[a]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27)
-
+slide = 1
+escape = False
 
 def blackscreen():
     screen.fill((0,0,0))
+def presstoplay():
     screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+def presstocontinue():
+    screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+def youlost():
+    screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 
 def draw():
     global game_active
@@ -77,34 +68,52 @@ def draw():
             x = 0
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
     elif game_active == False:
-        blackscreen()
+        if slide==1:
+            blackscreen()
+            screen.draw.text("Year 2005", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+            presstocontinue()
+        elif slide==2:
+            blackscreen()
+            screen.draw.text("First bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+            presstocontinue()
+        elif slide==3:
+            blackscreen()
+            screen.draw.text("Second bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+            presstocontinue()
+        elif slide==4:
+            blackscreen()
+            presstoplay()
+        elif slide==99:
+            blackscreen()
+            youlost()
+        elif slide==6:
+            blackscreen()
+            screen.draw.text("Year 2010", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+            presstocontinue()
+        elif slide==7:
+            blackscreen()
+            screen.draw.text("Third bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+            presstocontinue()
+        elif slide==8:
+            blackscreen()
+            presstoplay()
+
 
 
 
 def check_count():
     global count
     global game_level
-    if count >= 3:
+    global slide
+    if count >= TARGET:
         count = 0
-        game_level = game_level + 1
+        game_level+=1
+        game_active = False
+        slide+=1
 
-
-
-def on_key_down():
+def checkforactive():
     global game_active
-    global count
-    global SPEED
-    if not turtle.dead:
-        if keyboard.up:
-            turtle.y -= VELOCITY
-        if keyboard.down:
-            turtle.y += VELOCITY
-        if keyboard.left:
-            turtle.x -= VELOCITY
-        if keyboard.right:
-            turtle.x += VELOCITY
-    if keyboard.space:
-        game_active = True
+    if game_active:
         SPEED=3
         if turtle.dead:
             turtle.dead = False
@@ -115,6 +124,52 @@ def on_key_down():
                 reset_oilbarrel()
             elif game_level==3:
                 reset_trash()
+
+def checkturtledead():
+    global slide
+    global count
+    global game_active
+    if turtle.dead:
+        slide=99
+        game_active=False
+        count=0
+
+
+def on_key_down():
+    global game_active
+    global count
+    global SPEED
+    global slide
+    if not turtle.dead:
+        if keyboard.up:
+            turtle.y -= VELOCITY
+        if keyboard.down:
+            turtle.y += VELOCITY
+        if keyboard.left:
+            turtle.x -= VELOCITY
+        if keyboard.right:
+            turtle.x += VELOCITY
+    if slide == 99:
+        if keyboard.space:
+            reset_turtle()
+            if game_level==1:
+                slide=5
+                reset_sharknet()
+            elif game_level==2:
+                slide=9
+                reset_oilbarrel()
+            elif game_level==3:
+                slide=13
+                reset_trash()
+            game_active = True
+        if keyboard.escape:
+            exit()
+    if keyboard.space:
+        if not game_active:
+            if slide==4 or slide==8 or slide==12:
+                game_active = True
+                checkforactive()
+            slide+=1
     if keyboard.escape:
         game_active = False
         SPEED=0
@@ -127,26 +182,19 @@ def update_turtle():
     global count
     if game_level==1:
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
+            turtle.dead=True
             turtle.image = 'player1dead'
-            fact()
-            reset_turtle()
-            reset_sharknet()
-            game_active=False
-            count=0
+            checkturtledead()
     elif game_level==2:
         if turtle.colliderect(oil1) or turtle.colliderect(oil2) or turtle.colliderect(barrel):
+            turtle.dead=True
             turtle.image = 'turtletopdead'
-            game_active = 0
-            reset_turtle()
-            reset_oilbarrel()
-            count=0
+            checkturtledead()
     elif game_level==3:
         if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
+            turtle.dead=True
             turtle.image = 'player1dead'
-            game_active = 0
-            reset_turtle()
-            reset_trash()
-            count=0
+            checkturtledead()
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
@@ -160,6 +208,8 @@ def update_turtle():
 def reset_turtle():
     turtle.pos = (75, HEIGHT//2)
     turtle.image = 'player1'
+    if game_level==2:
+        turtle.image='turtletop'
     turtle.dead = False
 
 
@@ -271,9 +321,11 @@ def update_trash():
 def update():
     global game_level
     update_turtle()
+    checkturtledead()
     if game_level==1:
         update_sharknet()
     elif game_level==2:
         update_oilbarrel()
     elif game_level==3:
         update_trash()
+    print(str(slide))
