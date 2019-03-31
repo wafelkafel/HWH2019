@@ -7,6 +7,7 @@ SPEED = 3
 VELOCITY = 40
 TARGET = 10
 
+
 #functions
 def presstoplay():
     screen.draw.text("Press space to play", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
@@ -96,10 +97,11 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 
 
 # Initial state of the turtle
-i=0
+i=1
 count=0
 temp=0
 action=0
+music.play('lol')
 
 def draw():
     slides[i].draw()
@@ -145,12 +147,14 @@ def on_key_down():
             for e in slides[i].enemies:
                 e.x = WIDTH
         if keyboard.escape:
+            music.stop()
             exit()
 
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12 or i==14 or i==15):
             i+=1
         elif i==15:
+            music.top()
             exit()
     action+=1
 
