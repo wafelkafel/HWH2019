@@ -4,20 +4,63 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
-TARGET = 1
+TARGET = 5
 
-turtle = Actor('player1',       (75, HEIGHT//2) )
-shark1 = Actor('shark1', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-shark2 = Actor('shark2', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-oil1 = Actor('oil1', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-oil2 = Actor('oil2', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-barrel = Actor('barrel', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
-trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )), anchor=('left', 'center'))
-trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
-trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )), anchor=('left', 'center'))
-trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
-trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
+
+
+#functions
+def presstoplay(slide):
+    screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+def presstocontinue(slide):
+    screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+def youlost():
+    screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+
+#objects/slides
+class slide:
+    def blackscreen(self):
+        screen.fill((0,0,0))
+    def __init__(self, text,prompt):
+        self.text = text
+        self.prompt=prompt
+    def draw(self):
+        self.blackscreen()
+        screen.draw.text(str(self.text), midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+        self.prompt()
+
+class level:
+    def game_level(self, game_level):
+        self.game_level= game_level
+
+    def __init__(self,live,dead,background,*enemies):
+        self.turtle=Actor(live,(75, HEIGHT//2) )
+        self.background=background
+        for e in enemies:
+            self.enemies = self.enemies.append(Actor(e, (WIDTH, (random.randint(0,HEIGHT))), anchor=('left', 'center')))
+    def draw(self):
+        self.background.draw()
+        self.turtle.draw()
+        for e in self.enemies:
+            e.draw()
+
+slide1=slide('Year 2005',presstocontinue)
+slide2=slide('First bunch of text',presstocontinue)
+slide3=slide('Second bunch of text',presstocontinue)
+slide4=slide('',presstoplay)
+level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
+slide5=slide('Year 2010',presstocontinue)
+slide6=slide('Third bunch of text',presstocontinue)
+slide7=slide('',presstoplay)
+level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
+slide8=slide('Year 2019',presstocontinue)
+slide9=slide('Fourth bunch of text',presstocontinue)
+slide10=slide('',presstoplay)
+level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
+slide11=slide('Ending text')
+
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
+
 
 # Initial state of the turtle
 turtle.dead = False
@@ -25,86 +68,21 @@ turtle.x = 75
 count=0
 game_active = False
 game_level = 1
-slide = 1
+slide_count= 1
 escape = False
 
-def blackscreen():
-    screen.fill((0,0,0))
-def presstoplay():
-    screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-def presstocontinue():
-    screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
-def youlost():
-    screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-    screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+
+
 
 def draw():
-    global game_active
-    global game_level
-    if game_active:
-        if game_level == 1:
-            screen.blit('coralreef', (0, 0))
-            shark1.draw()
-            shark2.draw()
-            net.draw()
-            turtle.draw()
-        elif game_level == 2:
-            screen.blit('oceantop', (0,0))
-            turtle.image = 'turtletop'
-            oil1.draw()
-            oil2.draw()
-            barrel.draw()
-            turtle.draw()
-        elif game_level == 3:
-            screen.blit('ocean1', (0, 0))
-            turtle.image = 'player1'
-            trash1.draw()
-            trash2.draw()
-            trash3.draw()
-            trash4.draw()
-            trash5.draw()
-            turtle.draw()
-        elif game_level == 4:
-            x = 0
-        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
-    elif game_active == False:
-        if slide==1:
-            blackscreen()
-            screen.draw.text("Year 2005", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-            presstocontinue()
-        elif slide==2:
-            blackscreen()
-            screen.draw.text("First bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-            presstocontinue()
-        elif slide==3:
-            blackscreen()
-            screen.draw.text("Second bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-            presstocontinue()
-        elif slide==4:
-            blackscreen()
-            presstoplay()
-        elif slide==99:
-            blackscreen()
-            youlost()
-        elif slide==6:
-            blackscreen()
-            screen.draw.text("Year 2010", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-            presstocontinue()
-        elif slide==7:
-            blackscreen()
-            screen.draw.text("Third bunch of text", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-            presstocontinue()
-        elif slide==8:
-            blackscreen()
-            presstoplay()
-
-
-
+    slides[i].draw()
+    print(i)
 
 def check_count():
     global count
     global game_level
     global slide
+    global game_active
     if count >= TARGET:
         count = 0
         game_level+=1
