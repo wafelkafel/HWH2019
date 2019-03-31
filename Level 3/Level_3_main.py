@@ -6,12 +6,10 @@ SPEED = 3
 VELOCITY = 40
 TARGET = 5
 
-
-
 #functions
-def presstoplay(slide):
+def presstoplay():
     screen.draw.text("Press space to play a game!", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
-def presstocontinue(slide):
+def presstocontinue():
     screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
     screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
@@ -30,16 +28,17 @@ class slide:
         self.prompt()
 
 class level:
-    def game_level(self, game_level):
+    def __init__(self,game_level,live,dead,background,*enemies):
         self.game_level= game_level
-
-    def __init__(self,live,dead,background,*enemies):
         self.turtle=Actor(live,(75, HEIGHT//2) )
+        self.turtle.dead=False
+        self.turtle.x=75
         self.background=background
+        self.enemies=[]
         for e in enemies:
-            self.enemies = self.enemies.append(Actor(e, (WIDTH, (random.randint(0,HEIGHT))), anchor=('left', 'center')))
+            self.enemies.append(Actor(e, (WIDTH, (random.randint(0,HEIGHT))), anchor=('left', 'center')))
     def draw(self):
-        self.background.draw()
+        screen.blit(self.background,(0,0))
         self.turtle.draw()
         for e in self.enemies:
             e.draw()
@@ -57,21 +56,15 @@ slide8=slide('Year 2019',presstocontinue)
 slide9=slide('Fourth bunch of text',presstocontinue)
 slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
-slide11=slide('Ending text')
+slide11=slide('Ending text',None)
 
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
 
 
 # Initial state of the turtle
 i=0
-turtle.dead = False
-turtle.x = 75
 count=0
-game_active = False
-game_level = 1
-slide_count= 1
-escape = False
-
+#escape = False
 
 
 
@@ -83,50 +76,31 @@ def draw():
 
 def check_count():
     global count
-    global game_level
-    global slide
-    global game_active
+    global i
     if count >= TARGET:
         count = 0
-        game_level+=1
-        game_active = False
-        slide+=1
-
-def checkforactive():
-    global game_active
-    if game_active:
-        SPEED=3
-        if turtle.dead:
-            turtle.dead = False
-            reset_turtle()
-            if game_level==1:
-                reset_sharknet()
-            elif game_level==2:
-                reset_oilbarrel()
-            elif game_level==3:
-                reset_trash()
+        i+=1
 
 def checkturtledead():
-    global slide
+    global i
     global count
-    global game_active
-    if turtle.dead:
-        slide=99
-        game_active=False
+    if slides[i].turtle.dead:
+        i=99
         count=0
 
 
 def on_key_down():
     global i
-    if not turtle.dead:
-        if keyboard.up:
-            turtle.y -= VELOCITY
-        if keyboard.down:
-            turtle.y += VELOCITY
-        if keyboard.left:
-            turtle.x -= VELOCITY
-        if keyboard.right:
-            turtle.x += VELOCITY
+    if i==4 or i==8 or i ==12:
+        if not slides[i].turtle.dead:
+            if keyboard.up:
+                slides[i].turtle.y -= VELOCITY
+            if keyboard.down:
+                slides[i].turtle.y += VELOCITY
+            if keyboard.left:
+                slides[i].turtle.x -= VELOCITY
+            if keyboard.right:
+                slides[i].turtle.x += VELOCITY
   #  if slide == 99:
    #     if keyboard.space:
     #        reset_turtle()
@@ -149,157 +123,72 @@ def on_key_down():
         #game_active = False
         #SPEED=0
         #count=0
+  #  if keyboard.escape:
+   #     game_active = False
+    #    SPEED=0
+    #   count=0
 
 
 
 def update_turtle():
     global count
+    global slides
     if i==4:
-        if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
-            turtle.dead=True
-            turtle.image = 'player1dead'
-            checkturtledead()
-    elif game_level==2:
-        if turtle.colliderect(oil1) or turtle.colliderect(oil2) or turtle.colliderect(barrel):
-            turtle.dead=True
-            turtle.image = 'turtletopdead'
-            checkturtledead()
-    elif game_level==3:
-        if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
-            turtle.dead=True
-            turtle.image = 'player1dead'
-            checkturtledead()
-    if not 0 < turtle.top:
-        turtle.top=1
-    elif not turtle.bottom < HEIGHT:
-        turtle.bottom=HEIGHT-1
-    if not 0 < turtle.left:
-        turtle.left=1
-    elif not turtle.right < WIDTH:
-        turtle.right=WIDTH-1
+        for e in slides[i].enemies:
+            if slides[i].turtle.colliderect(e):
+                slides[i].turtle.dead=True
+                slides[i].turtle.image = 'player1dead'
+                checkturtledead()
+    elif i==8:
+        for e in slides[i].enemies:
+            if slides[i].turtle.colliderect(e):
+                slides[i].turtle.dead=True
+                slides[i].turtle.image = 'turtletopdead'
+                checkturtledead()
+    elif i==12:
+       for e in slides[i].enemies:
+            if slides[i].turtle.colliderect(e):
+                slides[i].turtle.dead=True
+                slides[i].turtle.image = 'player1dead'
+                checkturtledead()
+
+    if not 0 < slides[i].turtle.top:
+        slides[i].turtle.top=1
+    elif not slides[i].turtle.bottom < HEIGHT:
+        slides[i].turtle.bottom=HEIGHT-1
+    if not 0 < slides[i].turtle.left:
+        slides[i].left=1
+    elif not slides[i].turtle.right < WIDTH:
+        slides[i].turtle.right=WIDTH-1
 
 
 def reset_turtle():
-    turtle.pos = (75, HEIGHT//2)
-    turtle.image = 'player1'
-    if game_level==2:
-        turtle.image='turtletop'
-    turtle.dead = False
+    slides[i].turtle.pos = (75, HEIGHT//2)
+    slides[i].turtle.image = 'player1'
+    if i==4:
+        slides[i].turtle.image='turtletop'
+    slides[i].turtle.dead = False
 
 
-def reset_shark1():
-    shark1.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_shark2():
-    shark2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_net():
-    net.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_sharknet():
-    reset_shark1()
-    reset_shark2()
-    reset_net()
-def update_sharknet():
+def reset_enemy(enemy):
+    enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
+    #dV=random.randint(0,3)
+
+def update_enemy(enemies):
     global count
-    shark1.x -= SPEED+2
-    shark2.x -= SPEED+1
-    net.x -= SPEED-1
-    if shark1.right < 0:
-        reset_shark1()
-        count+=1
-        check_count()
-    if shark2.right < 0:
-        reset_shark2()
-        count+=1
-        check_count()
-    if net.right < 0:
-        reset_net()
-        count+=1
-        check_count()
-
-
-def reset_oil1():
-    oil1.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_oil2():
-    oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_barrel():
-    oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_oilbarrel():
-    reset_oil1()
-    reset_oil2()
-    reset_barrel()
-def update_oilbarrel():
-    global count
-    oil1.x -= SPEED+2
-    oil2.x -= SPEED+1
-    barrel.x -= SPEED
-    if oil1.right < 0:
-        reset_oil1()
-        count+=1
-        check_count()
-    if oil2.right < 0:
-        reset_oil2()
-        count+=1
-        check_count()
-    if barrel.right < 0:
-        reset_barrel()
-        count+=1
-        check_count()
-
-
-def reset_trash1():
-    trash1.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_trash2():
-    trash2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_trash3():
-    trash3.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_trash4():
-    trash4.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_trash5():
-    trash5.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def reset_trash():
-    reset_trash1()
-    reset_trash2()
-    reset_trash3()
-    reset_trash4()
-    reset_trash5()
-def update_trash():
-    global count
-    trash1.x -= SPEED+1
-    trash2.x -= SPEED
-    trash3.x -= SPEED-1
-    trash4.x -= SPEED+0.5
-    trash5.x -= SPEED-0.5
-    if trash1.right < 0:
-        reset_trash1()
-        count+=1
-        check_count()
-    if trash2.right < 0:
-        reset_trash2()
-        count+=1
-        check_count()
-    if trash3.right < 0:
-        reset_trash3()
-        count+=1
-        check_count()
-    if trash4.right < 0:
-        reset_trash4()
-        count+=1
-        check_count()
-    if trash5.right < 0:
-        reset_trash5()
-        count+=1
-        check_count()
-
+    for e in enemies:
+        e.x -= SPEED #+dV
+    for e in enemies:
+        if e.right < 0:
+            reset_enemy(e)
+            count+=1
+            check_count()
 
 
 
 def update():
-    global game_level
-    update_turtle()
-    checkturtledead()
-    if game_level==1:
-        update_sharknet()
-    elif game_level==2:
-        update_oilbarrel()
-    elif game_level==3:
-        update_trash()
-    print(str(slide))
+    if i==4 or i==8 or i ==12:
+        update_turtle()
+        checkturtledead()
+        update_enemy(slides[i].enemies)
+    print(str(i))
