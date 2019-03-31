@@ -5,7 +5,7 @@ WIDTH = 1000
 HEIGHT = 800
 SPEED = 3
 VELOCITY = 40
-TARGET = 5
+TARGET = 10
 
 #functions
 def presstoplay():
@@ -32,8 +32,8 @@ def fact():
     'There is more microplastic in the ocean than there are stars in the Milky Way.',
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
-    a=random.randint(0,11)
-    screen.draw.text(str(facts[a]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
+    #a=random.randint(0,11)
+    screen.draw.text(str(facts[action%12]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
 class slide:
@@ -99,6 +99,7 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 i=0
 count=0
 temp=0
+action=0
 
 def draw():
     slides[i].draw()
@@ -125,6 +126,7 @@ def make99():
 def on_key_down():
     global i
     global count
+    global action
     if i==4 or i==8 or i ==12 or i==14:
         if not slides[i].turtle.dead:
             if keyboard.up:
@@ -150,6 +152,7 @@ def on_key_down():
             i+=1
         elif i==15:
             exit()
+    action+=1
 
 def update_turtle():
     global count
