@@ -6,17 +6,17 @@ SPEED = 3
 VELOCITY = 40
 
 turtle = Actor('player1',       (75, HEIGHT//2) )
-shark1 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
-shark2 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
-net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))))
-oil1 = Actor('oil1', (WIDTH, ( random.randint(0,HEIGHT))))
-oil2 = Actor('oil2', (WIDTH, ( random.randint(0,HEIGHT))))
-barrel = Actor('barrel', (WIDTH, ( random.randint(0,HEIGHT))))
-trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
-trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
-trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
-trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
-trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
+shark1 = Actor('shark1', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+shark2 = Actor('shark2', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+oil1 = Actor('oil1', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+oil2 = Actor('oil2', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+barrel = Actor('barrel', (WIDTH, ( random.randint(0,HEIGHT))), anchor=('left', 'center'))
+trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )), anchor=('left', 'center'))
+trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
+trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )), anchor=('left', 'center'))
+trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
+trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )), anchor=('left', 'center'))
 
 # Initial state of the turtle
 turtle.dead = False
