@@ -49,7 +49,7 @@ class level:
 
 slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish. He and his \
-family had to find a new home. However, there were some dangers on the way…',presstocontinue)
+family had to find a new home. However, there were some dangers on the way.',presstocontinue)
 slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \
 by humans were the greatest dangers that on Toby\'s way.',presstocontinue)
 slide4=slide('',presstoplay)
@@ -61,7 +61,7 @@ slide7=slide('',presstoplay)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
 slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France. \
-It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day\…',presstocontinue)
+It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day.',presstocontinue)
 slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
 slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
@@ -72,16 +72,13 @@ plasticoceans.org\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
 slide99=slide('', youlost)
-slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide99]
 
 
 # Initial state of the turtle
 i=0
 count=0
-#escape = False
-
-
-
+temp=0
 
 def draw():
     global i
@@ -99,15 +96,17 @@ def checkturtledead():
     global i
     global count
     if slides[i].turtle.dead:
-        clock.schedule_unique((make99),1)
         count=0
+        clock.schedule_unique((make99),1)
 def make99():
     global i
+    global temp
     temp=i
-    i=99
+    i=len(slides)-1
 
 def on_key_down():
     global i
+    global count
     if i==4 or i==8 or i ==12:
         if not slides[i].turtle.dead:
             if keyboard.up:
@@ -118,34 +117,19 @@ def on_key_down():
                 slides[i].turtle.x -= VELOCITY
             if keyboard.right:
                 slides[i].turtle.x += VELOCITY
-    if i == 99:
+    elif i == len(slides)-1:
         if keyboard.space:
+            i=temp
+            count=0
             reset_turtle()
-            if game_level==1:
-                slide=5
-                reset_sharknet()
-            elif game_level==2:
-                slide=9
-                reset_oilbarrel()
-            elif game_level==3:
-                slide=13
-                reset_trash()
-            game_active = True
-            if keyboard.escape:
+            for e in slides[i].enemies:
+                e.x = WIDTH
+        if keyboard.escape:
             exit()
+
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12):
             i+=1
-    #if keyboard.escape:
-        #game_active = False
-        #SPEED=0
-        #count=0
-  #  if keyboard.escape:
-   #     game_active = False
-    #    SPEED=0
-    #   count=0
-
-
 
 def update_turtle():
     global count
@@ -175,11 +159,12 @@ def update_turtle():
 
 
 def reset_turtle():
+    slides[i].turtle.dead = False
     slides[i].turtle.pos = (75, HEIGHT//2)
     slides[i].turtle.image = 'player1'
-    if i==4:
+    if i==8:
         slides[i].turtle.image='turtletop'
-    slides[i].turtle.dead = False
+
 
 
 def reset_enemy(enemy,x):
@@ -187,9 +172,9 @@ def reset_enemy(enemy,x):
     y0  = slides[i].enemies[ind].y
     delta = ((slides[i].enemies[ind].height)//2)+((enemy.height)//2)+(slides[i].turtle.height)
     if ((y0-delta)-20 > (HEIGHT-20-(y0+delta))):
-        enemy.pos = (WIDTH, random.randint(20,y0 - delta))
+        enemy.pos = (WIDTH, random.randint(20,y0 - delta-10))
     else:
-        enemy.pos = (WIDTH, random.randint(y0+delta ,HEIGHT-20))
+        enemy.pos = (WIDTH, random.randint(y0+delta+10 ,HEIGHT-20))
 
 def update_enemy(enemies):
     global count
