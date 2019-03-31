@@ -42,6 +42,7 @@ class level:
         self.turtle.draw()
         for e in self.enemies:
             e.draw()
+        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
 slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening.\n \
@@ -186,12 +187,12 @@ def reset_turtle():
 
 def reset_enemy(enemy):
     enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
-    #dV=random.randint(0,3)
+
 
 def update_enemy(enemies):
     global count
     for e in enemies:
-        e.x -= SPEED #+dV
+        e.x -= SPEED+enemies.index(e)
     for e in enemies:
         if e.right < 0:
             reset_enemy(e)
@@ -205,4 +206,3 @@ def update():
         update_turtle()
         checkturtledead()
         update_enemy(slides[i].enemies)
-    print(str(i))
