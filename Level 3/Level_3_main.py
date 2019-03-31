@@ -198,7 +198,6 @@ def update_enemy(enemies):
             check_count()
 
 
-
 def update():
     if i==4 or i==8 or i ==12:
         update_turtle()
