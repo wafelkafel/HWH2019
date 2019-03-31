@@ -73,6 +73,7 @@ plasticoceans.org\n\
 4ocean.com\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
+
 slide99=slide('', youlost)
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, level4, slide12, slide99]
 
@@ -83,9 +84,7 @@ count=0
 temp=0
 
 def draw():
-    global i
     slides[i].draw()
-    print(i)
 
 def check_count():
     global count
@@ -95,11 +94,11 @@ def check_count():
         i+=1
 
 def checkturtledead():
-    global i
     global count
     if slides[i].turtle.dead:
         count=0
         clock.schedule_unique((make99),1)
+
 def make99():
     global i
     global temp
