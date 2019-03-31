@@ -6,16 +6,17 @@ SPEED = 3
 VELOCITY = 40
 
 turtle = Actor('player1',       (75, HEIGHT//2) )
-trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
-trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
-trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
-trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
-trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
 shark1 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
 shark2 = Actor('shark', (WIDTH, ( random.randint(0,HEIGHT))))
 net = Actor('net', (WIDTH, ( random.randint(0,HEIGHT))))
 oil1 = Actor('oil1', (WIDTH, ( random.randint(0,HEIGHT))))
 oil2 = Actor('oil2', (WIDTH, ( random.randint(0,HEIGHT))))
+barrel = Actor('barrel', (WIDTH, ( random.randint(0,HEIGHT))))
+trash1 = Actor('sixpackrings', (WIDTH, ( random.randint(0,HEIGHT)    )))
+trash2 = Actor('straw',         (WIDTH, ( random.randint(0,HEIGHT)   )))
+trash3 = Actor('plasticbag',     (WIDTH, ( random.randint(0,HEIGHT)  )))
+trash4 = Actor('plasticbottle', (WIDTH, ( random.randint(0,HEIGHT)   )))
+trash5 = Actor('can', (WIDTH, ( random.randint(0,HEIGHT)   )))
 
 # Initial state of the turtle
 turtle.dead = False
@@ -33,23 +34,23 @@ def draw():
     global game_level
     if game_active:
         if game_level == 1:
+            screen.blit('coralreef', (0, 0))
+            shark1.draw()
+            shark2.draw()
+            net.draw()
+            turtle.draw()
+        elif game_level == 2:
+            screen.blit('ocean1', (0,0))
+            oil1.draw()
+            oil2.draw()
+            turtle.draw()
+        elif game_level == 3:
             screen.blit('ocean1', (0, 0))
             trash1.draw()
             trash2.draw()
             trash3.draw()
             trash4.draw()
             trash5.draw()
-            turtle.draw()
-        elif game_level == 2:
-            screen.blit('coralreef', (0, 0))
-            shark1.draw()
-            shark2.draw()
-            net.draw()
-            turtle.draw()
-        elif game_level == 3:
-            screen.blit('ocean1', (0,0))
-            oil1.draw()
-            oil2.draw()
             turtle.draw()
         elif game_level == 4:
             x = 0
@@ -96,23 +97,23 @@ def on_key_down():
 def update_turtle():
     global game_active
     if game_level==1:
-        if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
-            turtle.image = 'player1dead'
-            game_active = 0
-            reset_turtle()
-            reset_trash()
-    elif game_level==2:
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
             turtle.image = 'player1dead'
             game_active = 0
             reset_turtle()
             reset_sharknet()
-    elif game_level==3:
-        if turtle.colliderect(oil1) or turtle.colliderect(oil2):
+    elif game_level==2:
+        if turtle.colliderect(oil1) or turtle.colliderect(oil2) or turtle.colliderect(barrel):
             turtle.image = 'player1dead'
             game_active = 0
             reset_turtle()
             reset_oil()
+    elif game_level==3:
+        if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
+            turtle.image = 'player1dead'
+            game_active = 0
+            reset_turtle()
+            reset_trash()
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
@@ -160,6 +161,8 @@ def reset_oil1():
     oil1.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def reset_oil2():
     oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
+def reset_barrel():
+    oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def update_oil():
     global count
     oil1.x -= SPEED+2
@@ -170,6 +173,9 @@ def update_oil():
         check_count()
     if oil2.right < 0:
         reset_oil2()
+        count+=1
+    if barrel.right < 0:
+        reset_barrel()
         count+=1
 
 
@@ -220,8 +226,8 @@ def update():
     global game_level
     update_turtle()
     if game_level==1:
-        update_trash()
-    elif game_level==2:
         update_sharknet()
-    elif game_level==3:
+    elif game_level==2:
         update_oil()
+    elif game_level==3:
+        update_trash()
