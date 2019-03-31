@@ -40,15 +40,15 @@ def draw():
             net.draw()
             turtle.draw()
         elif game_level == 2:
-            screen.blit('ocean1', (0,0))
-            turtle.image('turtletop')
+            screen.blit('oceantop', (0,0))
+            turtle.image = 'turtletop'
             oil1.draw()
             oil2.draw()
             barrel.draw()
             turtle.draw()
         elif game_level == 3:
             screen.blit('ocean1', (0, 0))
-            turtle.image('player1')
+            turtle.image = 'player1'
             trash1.draw()
             trash2.draw()
             trash3.draw()
