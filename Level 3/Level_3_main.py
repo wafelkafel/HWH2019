@@ -24,7 +24,7 @@ class slide:
         self.prompt=prompt
     def draw(self):
         self.blackscreen()
-        screen.draw.text(str(self.text), midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+        screen.draw.text(str(self.text), center=(WIDTH//2,HEIGHT//2), fontsize=32)
         self.prompt()
 
 class level:
