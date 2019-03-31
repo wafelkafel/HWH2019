@@ -44,14 +44,18 @@ class level:
             e.draw()
 
 slide1=slide('Year 2005',presstocontinue)
-slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. \
-A coral reef that his species had lived in for thousands of years began to perish. He and his \
+slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening.\n \
+A coral reef that his species had lived in for thousands of years began to perish.\n He and his \
 family had to find a new home. However, there were some dangers on the way…',presstocontinue)
-slide3=slide('Second bunch of text',presstocontinue)
+slide3=slide('Sharks - turtles’ natural predators and shrimp nets used \n \
+by humans were the greatest dangers that on Toby’s way.',presstocontinue)
 slide4=slide('',presstoplay)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
-slide6=slide('Third bunch of text',presstocontinue)
+slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest \n \
+accidental marine oil spill in the history of the petroleum industry. The oil spill was a direct result\n \
+of the explosion and sinking of the deepwater horizon oil rig. It killed thousands of marine mammals \n \
+and sea turtles and contaminated their habitats.',presstocontinue)
 slide7=slide('',presstoplay)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
