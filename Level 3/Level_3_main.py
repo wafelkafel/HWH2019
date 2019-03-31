@@ -115,7 +115,7 @@ def update_turtle():
             count=0
     elif game_level==2:
         if turtle.colliderect(oil1) or turtle.colliderect(oil2) or turtle.colliderect(barrel):
-            turtle.image = 'player1dead'
+            turtle.image = 'turtletopdead'
             game_active = 0
             reset_turtle()
             reset_oilbarrel()
