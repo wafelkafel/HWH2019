@@ -45,23 +45,23 @@ class level:
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
 slide1=slide('Year 2005',presstocontinue)
-slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish.\n He and his \
+slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish. He and his \
 family had to find a new home. However, there were some dangers on the way…',presstocontinue)
-slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \n \
+slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \
 by humans were the greatest dangers that on Toby\'s way.',presstocontinue)
 slide4=slide('',presstoplay)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
-slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest accidental marine oil spill in the history of the petroleum industry. The oil spill was a direct result\n \
+slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest accidental marine oil spill in the history of the petroleum industry. The oil spill was a direct result \
 of the explosion and sinking of the deepwater horizon oil rig. It killed thousands of marine mammals and sea turtles and contaminated their habitats.',presstocontinue)
 slide7=slide('',presstoplay)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
-slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France.\n \
+slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France. \
 It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day…',presstocontinue)
 slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
-slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans.\n \
+slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
 Make sure you support them at:\
 www.theoceancleanup.com/\
 www.plasticoceans.org/\
@@ -73,7 +73,7 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 
 
 # Initial state of the turtle
-i=0
+i=5
 count=0
 #escape = False
 
