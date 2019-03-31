@@ -41,11 +41,14 @@ def draw():
             turtle.draw()
         elif game_level == 2:
             screen.blit('ocean1', (0,0))
+            turtle.image('turtletop')
             oil1.draw()
             oil2.draw()
+            barrel.draw()
             turtle.draw()
         elif game_level == 3:
             screen.blit('ocean1', (0, 0))
+            turtle.image('player1')
             trash1.draw()
             trash2.draw()
             trash3.draw()
@@ -63,7 +66,7 @@ def draw():
 def check_count():
     global count
     global game_level
-    if count >= 5:
+    if count >= 1:
         count = 0
         game_level = game_level + 1
 
@@ -163,10 +166,15 @@ def reset_oil2():
     oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
 def reset_barrel():
     oil2.pos = (WIDTH, random.randint(40,HEIGHT-40))
-def update_oil():
+def reset_oilbarrel():
+    reset_oil1()
+    reset_oil2()
+    reset_barrel()
+def update_oilbarrel():
     global count
     oil1.x -= SPEED+2
     oil2.x -= SPEED+1
+    barrel.x -= SPEED
     if oil1.right < 0:
         reset_oil1()
         count+=1
@@ -228,6 +236,6 @@ def update():
     if game_level==1:
         update_sharknet()
     elif game_level==2:
-        update_oil()
+        update_oilbarrel()
     elif game_level==3:
         update_trash()
