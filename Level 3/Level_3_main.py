@@ -11,6 +11,8 @@ def presstoplay():
     screen.draw.text("Press space to play", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
 def presstocontinue():
     screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+def presstoexit():
+    screen.draw.text("Press space to exit", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
     screen.draw.text("Sad fact", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
     screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
@@ -58,22 +60,22 @@ slide7=slide('',presstoplay)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
 slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France. \
-It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day…',presstocontinue)
+It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day\…',presstocontinue)
 slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
 slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
-Make sure you support them at:\
-www.theoceancleanup.com/\
-www.plasticoceans.org/\
-www.4ocean.com/\
-www.5gyres.org/\
-www.oceana.org/',None)
+Make sure you support them at:\n \n\
+theoceancleanup.com\n\
+plasticoceans.org\n\
+4ocean.com\n\
+5gyres.org\n\
+oceana.org\n',presstoexit)
 
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11]
 
 
 # Initial state of the turtle
-i=5
+i=0
 count=0
 #escape = False
 
