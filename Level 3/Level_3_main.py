@@ -168,14 +168,13 @@ def reset_turtle():
 
 
 def reset_enemy(enemy):
-    global dV
     enemy.pos = (WIDTH, random.randint(40,HEIGHT-40))
     dV=random.seed(0,3)
 
 def update_enemy(enemies):
     global count
     for e in enemies:
-        e.x -= SPEED +dV
+        e.x -= SPEED+enemies.index(e)
     for e in enemies:
         if e.right < 0:
             reset_enemy(e)
