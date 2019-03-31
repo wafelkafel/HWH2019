@@ -132,6 +132,8 @@ def on_key_down():
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12 or i==14):
             i+=1
+        elif i==15:
+            exit()
 
 def update_turtle():
     global count
@@ -196,5 +198,3 @@ def update():
     if i==4 or i==8 or i ==12 or i==14:
         update_turtle()
         update_enemy(slides[i].enemies)
-
-    print(str(i))
