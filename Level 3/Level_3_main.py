@@ -66,7 +66,7 @@ def draw():
 def check_count():
     global count
     global game_level
-    if count >= 1:
+    if count >= 3:
         count = 0
         game_level = game_level + 1
 
@@ -91,6 +91,12 @@ def on_key_down():
         if turtle.dead:
             turtle.dead = False
             reset_turtle()
+            if game_level==1:
+                reset_sharknet()
+            elif game_level==2:
+                reset_oilbarrel()
+            elif game_level==3:
+                reset_trash()
     if keyboard.escape:
         game_active = False
         SPEED=0
@@ -99,24 +105,28 @@ def on_key_down():
 
 def update_turtle():
     global game_active
+    global count
     if game_level==1:
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
             turtle.image = 'player1dead'
-            game_active = 0
             reset_turtle()
             reset_sharknet()
+            game_active=False
+            count=0
     elif game_level==2:
         if turtle.colliderect(oil1) or turtle.colliderect(oil2) or turtle.colliderect(barrel):
             turtle.image = 'player1dead'
             game_active = 0
             reset_turtle()
             reset_oilbarrel()
+            count=0
     elif game_level==3:
         if turtle.colliderect(trash1) or turtle.colliderect(trash2) or turtle.colliderect(trash3) or turtle.colliderect(trash4) or turtle.colliderect(trash5):
             turtle.image = 'player1dead'
             game_active = 0
             reset_turtle()
             reset_trash()
+            count=0
     if not 0 < turtle.top:
         turtle.top=1
     elif not turtle.bottom < HEIGHT:
@@ -124,7 +134,7 @@ def update_turtle():
     if not 0 < turtle.left:
         turtle.left=1
     elif not turtle.right < WIDTH:
-        turtle.right=WIDTH
+        turtle.right=WIDTH-1
 
 
 def reset_turtle():
