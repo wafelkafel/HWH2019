@@ -64,7 +64,9 @@ slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of oce
 It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day.',presstocontinue)
 slide10=slide('',presstoplay)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
-slide11=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
+slide11=slide('However, there is still time to take action! If we act now, we can keep the oceans a good habitat for turtles and other animals to live in.',presstocontinue)
+level4=level(4,'player1old',None,'coralreefhealthy','happyfish','happyoctopus','jellyfish','eel','crab')
+slide12=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
 Make sure you support them at:\n \n\
 theoceancleanup.com\n\
 plasticoceans.org\n\
@@ -72,7 +74,7 @@ plasticoceans.org\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
 slide99=slide('', youlost)
-slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide99]
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, level4, slide12, slide99]
 
 
 # Initial state of the turtle
@@ -107,7 +109,7 @@ def make99():
 def on_key_down():
     global i
     global count
-    if i==4 or i==8 or i ==12:
+    if i==4 or i==8 or i ==12 or i==14:
         if not slides[i].turtle.dead:
             if keyboard.up:
                 slides[i].turtle.y -= VELOCITY
@@ -128,7 +130,7 @@ def on_key_down():
             exit()
 
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12):
+        if not (i == 4 or i== 8 or i==12 pr i==14):
             i+=1
 
 def update_turtle():
@@ -146,7 +148,7 @@ def update_turtle():
                 slides[i].turtle.dead=True
                 slides[i].turtle.image = 'turtletopdead'
                 checkturtledead()
-
+    else if i==14
 
     if not 0 < slides[i].turtle.top:
         slides[i].turtle.top=1
