@@ -63,6 +63,7 @@ slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,sl
 
 
 # Initial state of the turtle
+i=0
 turtle.dead = False
 turtle.x = 75
 count=0
@@ -75,6 +76,7 @@ escape = False
 
 
 def draw():
+    global i
     slides[i].draw()
     print(i)
 
@@ -114,10 +116,7 @@ def checkturtledead():
 
 
 def on_key_down():
-    global game_active
-    global count
-    global SPEED
-    global slide
+    global i
     if not turtle.dead:
         if keyboard.up:
             turtle.y -= VELOCITY
@@ -127,38 +126,34 @@ def on_key_down():
             turtle.x -= VELOCITY
         if keyboard.right:
             turtle.x += VELOCITY
-    if slide == 99:
-        if keyboard.space:
-            reset_turtle()
-            if game_level==1:
-                slide=5
-                reset_sharknet()
-            elif game_level==2:
-                slide=9
-                reset_oilbarrel()
-            elif game_level==3:
-                slide=13
-                reset_trash()
-            game_active = True
-        if keyboard.escape:
-            exit()
+  #  if slide == 99:
+   #     if keyboard.space:
+    #        reset_turtle()
+     #       if game_level==1:
+      #          slide=5
+       #         reset_sharknet()
+        #    elif game_level==2:
+         #       slide=9
+          #      reset_oilbarrel()
+           # elif game_level==3:
+            #    slide=13
+             #   reset_trash()
+         #   game_active = True
+       # if keyboard.escape:
+        #    exit()
     if keyboard.space:
-        if not game_active:
-            if slide==4 or slide==8 or slide==12:
-                game_active = True
-                checkforactive()
-            slide+=1
-    if keyboard.escape:
-        game_active = False
-        SPEED=0
-        count=0
+        if not (i == 4 or i== 8 or i==12):
+            i+=1
+  #  if keyboard.escape:
+   #     game_active = False
+    #    SPEED=0
+     #   count=0
 
 
 
 def update_turtle():
-    global game_active
     global count
-    if game_level==1:
+    if i==4:
         if turtle.colliderect(shark1) or turtle.colliderect(shark2) or turtle.colliderect(net):
             turtle.dead=True
             turtle.image = 'player1dead'
