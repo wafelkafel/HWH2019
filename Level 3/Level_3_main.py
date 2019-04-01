@@ -3,22 +3,22 @@ import numpy as np
 
 WIDTH = 1000
 HEIGHT = 800
-SPEED = 3
+SPEED = 4
 VELOCITY = 40
-TARGET = 20
-
+TARGET = 5
 
 #functions
-def presstoplay():
-    screen.draw.text("Press space to play", midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
+def presstoplay1():
+    screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate\n\nPress space to play", center=(WIDTH//2, HEIGHT//2), fontsize=32)
+def presstoplay2():
+    screen.draw.text("Toby doesn't have to avoid anything anymore!\n\nUse arrow keys to navigate\n\nPress space to play", center=(WIDTH//2, HEIGHT//2), fontsize=32)
 def presstocontinue():
-    screen.draw.text("Press space to continue", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to continue", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstoexit():
-    screen.draw.text("Press space to exit", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to exit", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
-    #screen.draw.text(fact, midtop=(WIDTH//2, HEIGHT//2), fontsize=32)
     fact()
-    screen.draw.text("Press space to try again or escape to exit the game", midtop=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to try again or escape to exit the game", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
     'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, 36% of seals and 40% of seabird species examined.',
@@ -34,7 +34,7 @@ def fact():
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
     #a=random.randint(0,11)
-    screen.draw.text(str(facts[action%12]), midtop=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
+    screen.draw.text(str(facts[action%12]), center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
 class slide:
@@ -69,23 +69,26 @@ slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish. He and his \
 family had to find a new home. However, there were some dangers on the way.',presstocontinue)
 slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \
-by humans were the greatest dangers that on Toby\'s way.',presstocontinue)
-slide4=slide('',presstoplay)
+by humans were the greatest dangers on Toby\'s way.',presstocontinue)
+slide4=slide('',presstoplay1)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
 slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest accidental marine oil spill in the history of the petroleum industry. The oil spill was a direct result \
 of the explosion and sinking of the deepwater horizon oil rig. It killed thousands of marine mammals and sea turtles and contaminated their habitats.',presstocontinue)
-slide7=slide('',presstoplay)
+slide7=slide('',presstoplay1)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
 slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France. \
 It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day.',presstocontinue)
-slide10=slide('',presstoplay)
+slide10=slide('',presstoplay1)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
 slide11=slide('However, there is still time to take action! If we act now, we can keep the oceans a good habitat for turtles and other animals to live in.',presstocontinue)
+slide12=slide('If we take action, this is what the oceans could look like',presstocontinue)
+slide13=slide('Year 2100',presstocontinue)
+slide14=slide('',presstoplay2)
 level4=level(4,'player1old',None,'coralreefhealthy','happyfish','happyoctopus','jellyfish','eel','crab')
-slide12=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans. \
-Make sure you support them at:\n \n\
+slide15=slide('There are numerous organisations that decided to take up the challenge of cleaning up the oceans.\
+ Make sure you support them at:\n\n\
 theoceancleanup.com\n\
 plasticoceans.org\n\
 4ocean.com\n\
@@ -93,11 +96,11 @@ plasticoceans.org\n\
 oceana.org\n',presstoexit)
 
 slide99=slide('', youlost)
-slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, level4, slide12, slide99]
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide12,slide13,slide14,level4, slide15, slide99]
 
 
 # Initial state of the turtle
-i=1
+i=0
 count=0
 temp=0
 action=0
@@ -129,7 +132,7 @@ def on_key_down():
     global i
     global count
     global action
-    if i==4 or i==8 or i ==12 or i==14:
+    if i==4 or i==8 or i ==12 or i==17:
         if not slides[i].turtle.dead:
             if keyboard.up:
                 slides[i].turtle.y -= VELOCITY
@@ -151,9 +154,9 @@ def on_key_down():
             exit()
 
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12 or i==14 or i==15):
+        if not (i == 4 or i== 8 or i==12 or i==17 or i==18):
             i+=1
-        elif i==15:
+        elif i==18:
             music.top()
             exit()
     action+=1
@@ -209,7 +212,7 @@ def update_enemy(enemies):
     x=[0,0,0,0,0]
     for e in enemies:
         e.x -= SPEED+enemies.index(e)
-        x[enemies.index(e)]=e.x
+        x[enemies.index(e)]=e.right
     for e in enemies:
         if e.right < 0:
             reset_enemy(e,x)
@@ -218,6 +221,6 @@ def update_enemy(enemies):
 
 
 def update():
-    if i==4 or i==8 or i ==12 or i==14:
+    if i==4 or i==8 or i ==12 or i==17:
         update_turtle()
         update_enemy(slides[i].enemies)
