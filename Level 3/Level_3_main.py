@@ -199,14 +199,14 @@ def check_count():
     if count >= TARGET and (slides[i].turtle.dead)==False:
         count = 0
         i+=1
-=======
+
     if count >= TARGET:
         count=0
         if i==4 or i==8 or i ==12:
             make100()
         else:
             i+=1
->>>>>>> cd4e3c89104aef560c3559f39fceb95cea0037ed
+
 
 #see if tutrtle died
 def checkturtledead():
