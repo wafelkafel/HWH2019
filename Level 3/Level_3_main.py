@@ -10,7 +10,7 @@ VELOCITY = 40
 TARGET = 6
 
 # Initial state of the game
-i=12
+i=0
 count=0
 temp=0
 action=0
@@ -147,7 +147,7 @@ def on_key_down():
                 slides[i].turtle.x -= VELOCITY
             if keyboard.right:
                 slides[i].turtle.x += VELOCITY
-    elif i == len(slides)-2:
+    elif i == len(slides)-1:
         if keyboard.space:
             i=temp
             reset_turtle()
@@ -196,7 +196,6 @@ def update_turtle():
 def check_count():
     global count
     global i
-<<<<<<< HEAD
     if count >= TARGET and (slides[i].turtle.dead)==False:
         count = 0
         i+=1
