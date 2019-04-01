@@ -265,10 +265,14 @@ def update():
     if i==4 or i==8 or i ==12 or i==17:
         update_turtle()
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("dead"+str(slides[i].turtle.dead))
         update_enemy(slides[i].enemies)
     print("i"+str(i))
     print("count"+str(count))
+=======
+        update_enemy(slides[i].enemies)
+>>>>>>> parent of b5971eb... Update Level_3_main.py
 =======
         update_enemy(slides[i].enemies)
 >>>>>>> parent of b5971eb... Update Level_3_main.py
