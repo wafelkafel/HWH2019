@@ -32,6 +32,9 @@ def presstoexit():
 def youlost():
     fact()
     screen.draw.text("Press space to try again or escape to exit the game", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
+def levelup():
+    screen.draw.text("Level up!", fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=64)
+    screen.draw.text("Press space to continue", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
     'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, \
@@ -117,9 +120,11 @@ plasticoceans.org\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
 slide99=slide('', youlost)
+slide100=slide('', levelup)
 
 #fetch slides and levels into an array
-slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide12,slide13,slide14,level4, slide15, slide99]
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,\
+level3,slide11,slide12,slide13,slide14,level4,slide15,slide99,slide100]
 
 #draw the game, basically
 def draw():
@@ -130,6 +135,8 @@ def on_key_down():
     global i
     global count
     global action
+    global temp
+    global temp1
     if i==4 or i==8 or i ==12 or i==17:
         if not slides[i].turtle.dead:
             if keyboard.up:
@@ -140,16 +147,18 @@ def on_key_down():
                 slides[i].turtle.x -= VELOCITY
             if keyboard.right:
                 slides[i].turtle.x += VELOCITY
-    elif i == len(slides)-1:
+    elif i == len(slides)-2:
         if keyboard.space:
             i=temp
             reset_turtle()
-            for e in slides[i].enemies:
+            for e in slides[i].enemies: #reset enemies
                 e.x = WIDTH
         if keyboard.escape:
             music.stop()
             exit()
-
+    elif i == len(slides)-1:
+        if keyboard.space:
+            i=temp1+1
     if keyboard.space:
         if not (i == 4 or i== 8 or i==12 or i==17 or i==18):
             i+=1
@@ -188,8 +197,11 @@ def check_count():
     global count
     global i
     if count >= TARGET:
-        count = 0
-        i+=1
+        count=0
+        if i==4 or i==8 or i ==12:
+            make100()
+        else:
+            i+=1
 
 #see if tutrtle died
 def checkturtledead():
@@ -202,6 +214,13 @@ def make99():
     global i
     global temp
     temp=i
+    i=len(slides)-2
+
+#go to a 'Level up!' slide
+def make100():
+    global i
+    global temp1
+    temp1=i
     i=len(slides)-1
 
 #reset turtle position and state
