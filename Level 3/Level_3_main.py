@@ -45,7 +45,7 @@ def fact():
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
     #a=random.randint(0,11)
-    screen.draw.text(str(facts[action%12]), center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
+    screen.draw.text(str(facts[action%(len(facts))]), center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
 class slide:
@@ -132,7 +132,6 @@ def on_key_down():
     elif i == len(slides)-1:
         if keyboard.space:
             i=temp
-            count=0
             reset_turtle()
             for e in slides[i].enemies:
                 e.x = WIDTH
@@ -169,7 +168,7 @@ def update_turtle():
     elif not slides[i].turtle.bottom < HEIGHT:
         slides[i].turtle.bottom=HEIGHT-1
     if not 0 < slides[i].turtle.left:
-        slides[i].left=1
+        slides[i].turtle.left=1
     elif not slides[i].turtle.right < WIDTH:
         slides[i].turtle.right=WIDTH-1
 
@@ -185,7 +184,6 @@ def check_count():
 def checkturtledead():
     global count
     if slides[i].turtle.dead:
-        count=0
         clock.schedule_unique((make99),1)
 
 #go to slide with sad fact
@@ -197,6 +195,7 @@ def make99():
 
 #reset turtle position and state
 def reset_turtle():
+    count=0
     slides[i].turtle.dead = False
     slides[i].turtle.pos = (75, HEIGHT//2)
     slides[i].turtle.image = 'player1'
