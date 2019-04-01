@@ -7,7 +7,6 @@ HEIGHT = 800
 #gameplay settings
 SPEED = 4
 VELOCITY = 40
-TARGET = 1
 TARGET = 6
 
 # Initial state of the game
@@ -33,8 +32,6 @@ def presstoexit():
 def youlost():
     fact()
     screen.draw.text("Press space to try again or escape to exit the game", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
-def levelup():
-    screen.draw.text("Level up!", fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=64)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
     'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, \
