@@ -5,9 +5,9 @@ WIDTH = 1000
 HEIGHT = 800
 
 #gameplay settings
-SPEED = 12
+SPEED = 3
 VELOCITY = 40
-TARGET = 1
+TARGET = 10
 
 # Initial state of the game
 i=0
@@ -38,13 +38,11 @@ def levelup():
     screen.draw.text("Press space to continue", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
-    'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, \
-    36% of seals and 40% of seabird species examined.',
+    'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, 36% of seals and 40% of seabird species examined.',
     'Over 150 plastic bottles litter each mile of UK beaches.',
     'Approx 5,000 items of marine plastic pollution have been found per mile of beach in the UK.',
     'Plastics consistently make up 60 to 90% of all marine debris studied.',
-    'There may now be around 5.25 trillion macro and microplastic pieces floating in the open ocean. \
-    Weighing up to 269,000 tonnes.',
+    'There may now be around 5.25 trillion macro and microplastic pieces floating in the open ocean. Weighing up to 269,000 tonnes.',
     'Every day approximately 8 million pieces of plastic pollution find their way into our oceans.',
     'Scientists have recently discovered microplastics embedded deep in the Arctic ice.',
     'Every minute, one garbage truck of plastic is dumped into our oceans.',
@@ -52,7 +50,6 @@ def fact():
     'There is more microplastic in the ocean than there are stars in the Milky Way.',
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
-    #a=random.randint(0,11)
     screen.draw.text(str(facts[action%(len(facts))]), fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
@@ -138,16 +135,15 @@ def on_key_down():
     global action
     global temp
     global temp1
-    if i==4 or i==8 or i ==12 or i==17:
-        if not slides[i].turtle.dead:
-            if keyboard.up:
-                slides[i].turtle.y -= VELOCITY
-            if keyboard.down:
-                slides[i].turtle.y += VELOCITY
-            if keyboard.left:
-                slides[i].turtle.x -= VELOCITY
-            if keyboard.right:
-                slides[i].turtle.x += VELOCITY
+    if (i==4 or i==8 or i ==12 or i==17 )and not(slides[i].turtle.dead):
+        if keyboard.up:
+            slides[i].turtle.y -= VELOCITY
+        if keyboard.down:
+            slides[i].turtle.y += VELOCITY
+        if keyboard.left:
+            slides[i].turtle.x -= VELOCITY
+        if keyboard.right:
+            slides[i].turtle.x += VELOCITY
     elif i == len(slides)-2:
         if keyboard.space:
             i=temp
@@ -160,13 +156,19 @@ def on_key_down():
     elif i == len(slides)-1:
         if keyboard.space:
             i=temp1+1
+
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12 or i==17 or i==(len(slides)-3) or i==(len(slides)-2) or i==(len(slides)-1)):
+        if not (i==4 or i==8 or i==12 or i==17 or i==(len(slides)-3) or i==(len(slides)-2) or i==(len(slides)-1)):
             i+=1
-        elif i==(len(slides)-3):
+        if i==(len(slides)-3):
             music.stop()
             exit()
-    action+=1
+
+    if keyboard.escape:
+        music.stop()
+        exit()
+    if not i==(len(slides)-2):
+        action+=1
 
 #update turtle info
 def update_turtle():
@@ -194,7 +196,7 @@ def update_turtle():
     elif not slides[i].turtle.right < WIDTH:
         slides[i].turtle.right=WIDTH-1
 
-#cchecking the count in game
+#checking the count in game
 def check_count():
     global count
     global i
@@ -210,6 +212,7 @@ def checkturtledead():
     global count
     global i
     if slides[i].turtle.dead:
+        sounds.fail.play()
         clock.schedule_unique((make99),1)
 
 #go to slide with sad fact
@@ -267,7 +270,4 @@ def reset_enemy(enemy,x):
 def update():
     if i==4 or i==8 or i ==12 or i==17:
         update_turtle()
-        print("dead"+str(slides[i].turtle.dead))
         update_enemy(slides[i].enemies)
-    print("i"+str(i))
-    print("count"+str(count))
