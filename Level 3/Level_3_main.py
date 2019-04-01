@@ -1,13 +1,24 @@
 import random
 import numpy as np
-
+#display settings
 WIDTH = 1000
 HEIGHT = 800
+
+#gameplay settings
 SPEED = 4
 VELOCITY = 40
 TARGET = 5
 
-#functions
+# Initial state of the game
+i=0
+count=0
+temp=0
+action=0
+
+#music
+music.play('chameleon')
+
+#functions for slides
 def presstoplay1():
     screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate\n\nPress space to play", center=(WIDTH//2, HEIGHT//2), fontsize=32)
 def presstoplay2():
@@ -65,6 +76,7 @@ class level:
             e.draw()
         screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
+#making slides and levels
 slide1=slide('Year 2005',presstocontinue)
 slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish. He and his \
 family had to find a new home. However, there were some dangers on the way.',presstocontinue)
@@ -94,40 +106,15 @@ plasticoceans.org\n\
 4ocean.com\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
-
 slide99=slide('', youlost)
+
+#combine slides
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide12,slide13,slide14,level4, slide15, slide99]
-
-
-# Initial state of the turtle
-i=0
-count=0
-temp=0
-action=0
-music.play('lol')
 
 def draw():
     slides[i].draw()
 
-def check_count():
-    global count
-    global i
-    if count >= TARGET:
-        count = 0
-        i+=1
-
-def checkturtledead():
-    global count
-    if slides[i].turtle.dead:
-        count=0
-        clock.schedule_unique((make99),1)
-
-def make99():
-    global i
-    global temp
-    temp=i
-    i=len(slides)-1
-
+#define what happens for pressing different keys
 def on_key_down():
     global i
     global count
@@ -161,6 +148,7 @@ def on_key_down():
             exit()
     action+=1
 
+#update turtle info
 def update_turtle():
     global count
     global slides
@@ -176,9 +164,6 @@ def update_turtle():
                 slides[i].turtle.dead=True
                 slides[i].turtle.image = 'turtletopdead'
                 checkturtledead()
-
-
-
     if not 0 < slides[i].turtle.top:
         slides[i].turtle.top=1
     elif not slides[i].turtle.bottom < HEIGHT:
@@ -188,7 +173,29 @@ def update_turtle():
     elif not slides[i].turtle.right < WIDTH:
         slides[i].turtle.right=WIDTH-1
 
+#cchecking the count in game
+def check_count():
+    global count
+    global i
+    if count >= TARGET:
+        count = 0
+        i+=1
 
+#see if tutrtle died
+def checkturtledead():
+    global count
+    if slides[i].turtle.dead:
+        count=0
+        clock.schedule_unique((make99),1)
+
+#go to slide with sad fact
+def make99():
+    global i
+    global temp
+    temp=i
+    i=len(slides)-1
+
+#reset turtle position and state
 def reset_turtle():
     slides[i].turtle.dead = False
     slides[i].turtle.pos = (75, HEIGHT//2)
@@ -197,16 +204,7 @@ def reset_turtle():
         slides[i].turtle.image='turtletop'
 
 
-
-def reset_enemy(enemy,x):
-    ind = np.argmax(x)
-    y0  = slides[i].enemies[ind].y
-    delta = ((slides[i].enemies[ind].height)//2)+((enemy.height)//2)+(slides[i].turtle.height)
-    if ((y0-delta)-20 > (HEIGHT-20-(y0+delta))):
-        enemy.pos = (WIDTH, random.randint(20,y0 - delta-10))
-    else:
-        enemy.pos = (WIDTH, random.randint(y0+delta+10 ,HEIGHT-20))
-
+#update enemy's position
 def update_enemy(enemies):
     global count
     x=[0,0,0,0,0]
@@ -219,6 +217,15 @@ def update_enemy(enemies):
             count+=1
             check_count()
 
+#reset enemy's position
+def reset_enemy(enemy,x):
+    ind = np.argmax(x)
+    y0  = slides[i].enemies[ind].y
+    delta = ((slides[i].enemies[ind].height)//2)+((enemy.height)//2)+(slides[i].turtle.height)
+    if ((y0-delta)-20 > (HEIGHT-20-(y0+delta))):
+        enemy.pos = (WIDTH, random.randint(20,y0 - delta-10))
+    else:
+        enemy.pos = (WIDTH, random.randint(y0+delta+10 ,HEIGHT-20))
 
 def update():
     if i==4 or i==8 or i ==12 or i==17:
