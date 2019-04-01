@@ -7,7 +7,7 @@ HEIGHT = 800
 #gameplay settings
 SPEED = 4
 VELOCITY = 40
-TARGET = 5
+TARGET = 1
 
 # Initial state of the game
 i=0
@@ -20,9 +20,11 @@ music.play('chameleon')
 
 #functions for slides
 def presstoplay1():
-    screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate\n\nPress space to play", center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate", center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstoplay2():
-    screen.draw.text("Toby doesn't have to avoid anything anymore!\n\nUse arrow keys to navigate\n\nPress space to play", center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Toby doesn't have to avoid anything anymore!\n\nUse arrow keys to navigate\n", center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstocontinue():
     screen.draw.text("Press space to continue", center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstoexit():
@@ -51,7 +53,7 @@ def fact():
 class slide:
     def blackscreen(self):
         screen.fill((0,0,0))
-    def __init__(self, text,prompt):
+    def __init__(self,text,prompt):
         self.text = text
         self.prompt=prompt
     def draw(self):
@@ -78,23 +80,28 @@ class level:
 
 #making slides and levels
 slide1=slide('Year 2005',presstocontinue)
-slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. A coral reef that his species had lived in for thousands of years began to perish. He and his \
+slide2=slide('Toby is a sea turtle. He was 3 years old when something bad started happening. \
+A coral reef that his species had lived in for thousands of years began to perish. He and his \
 family had to find a new home. However, there were some dangers on the way.',presstocontinue)
 slide3=slide('Sharks - turtles\' natural predators and shrimp nets used \
 by humans were the greatest dangers on Toby\'s way.',presstocontinue)
 slide4=slide('',presstoplay1)
 level1=level(1,'player1','player1dead','coralreef','shark1','shark2','net')
 slide5=slide('Year 2010',presstocontinue)
-slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest accidental marine oil spill in the history of the petroleum industry. The oil spill was a direct result \
-of the explosion and sinking of the deepwater horizon oil rig. It killed thousands of marine mammals and sea turtles and contaminated their habitats.',presstocontinue)
+slide6=slide('The deepwater horizon oil spill in the Gulf of Mexico is considered the largest accidental \
+marine oil spill in the history of the petroleum industry. The oil spill was a direct result \
+of the explosion and sinking of the deepwater horizon oil rig. It killed thousands of marine mammals \
+and sea turtles and contaminated their habitats.',presstocontinue)
 slide7=slide('',presstoplay1)
 level2=level(2,'turtletop','turtletopdead','oceantop','oil1','oil2','barrel')
 slide8=slide('Year 2019',presstocontinue)
-slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world and is located between Hawaii and California. It covers an area three times the size of France. \
+slide9=slide('The Great Pacific Garbage Patch is the largest accumulation of ocean plastic in the world \
+and is located between Hawaii and California. It covers an area three times the size of France. \
 It poses great risks for the safety and health of marine animals. It consists mainly of plastics we use every day.',presstocontinue)
 slide10=slide('',presstoplay1)
 level3=level(3,'player1','player1dead','ocean1','plasticbag','plasticbottle','sixpackrings','can','straw')
-slide11=slide('However, there is still time to take action! If we act now, we can keep the oceans a good habitat for turtles and other animals to live in.',presstocontinue)
+slide11=slide('However, there is still time to take action! If we act now, we can keep the oceans \
+a good habitat for turtles and other animals to live in.',presstocontinue)
 slide12=slide('If we take action, this is what the oceans could look like',presstocontinue)
 slide13=slide('Year 2100',presstocontinue)
 slide14=slide('',presstoplay2)
