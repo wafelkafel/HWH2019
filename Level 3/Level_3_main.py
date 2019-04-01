@@ -60,7 +60,7 @@ class slide:
         self.prompt=prompt
     def draw(self):
         self.blackscreen()
-        screen.draw.text(str(self.text), fontname='charybdis', center=(WIDTH//2,HEIGHT//2), fontsize=32, width=600)
+        screen.draw.text(str(self.text), fontname='charybdis', center=(WIDTH//2,HEIGHT//2), fontsize=32, width=700)
         self.prompt()
 
 #objects/levels
