@@ -20,25 +20,27 @@ music.play('chameleon')
 
 #functions for slides
 def presstoplay1():
-    screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate", center=(WIDTH//2, HEIGHT//2), fontsize=32)
-    screen.draw.text("Press space to play", center=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Help Toby avoid obstacles\n\nUse arrow keys to navigate", fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstoplay2():
-    screen.draw.text("Toby doesn't have to avoid anything anymore!\n\nUse arrow keys to navigate\n", center=(WIDTH//2, HEIGHT//2), fontsize=32)
-    screen.draw.text("Press space to play", center=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Toby doesn't have to avoid anything anymore!\n\nUse arrow keys to navigate\n", fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=32)
+    screen.draw.text("Press space to play", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstocontinue():
-    screen.draw.text("Press space to continue", center=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to continue", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def presstoexit():
-    screen.draw.text("Press space to exit", center=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to exit", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def youlost():
     fact()
-    screen.draw.text("Press space to try again or escape to exit the game", center=(WIDTH//2, HEIGHT-100), fontsize=26)
+    screen.draw.text("Press space to try again or escape to exit the game", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
-    'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, 36% of seals and 40% of seabird species examined.',
+    'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, \
+    36% of seals and 40% of seabird species examined.',
     'Over 150 plastic bottles litter each mile of UK beaches.',
     'Approx 5,000 items of marine plastic pollution have been found per mile of beach in the UK.',
     'Plastics consistently make up 60 to 90% of all marine debris studied.',
-    'There may now be around 5.25 trillion macro and microplastic pieces floating in the open ocean. Weighing up to 269,000 tonnes.',
+    'There may now be around 5.25 trillion macro and microplastic pieces floating in the open ocean. \
+    Weighing up to 269,000 tonnes.',
     'Every day approximately 8 million pieces of plastic pollution find their way into our oceans.',
     'Scientists have recently discovered microplastics embedded deep in the Arctic ice.',
     'Every minute, one garbage truck of plastic is dumped into our oceans.',
@@ -47,7 +49,7 @@ def fact():
     'More than 50 percent of sea turtles have consumed plastic.']
     screen.fill((0,0,0))
     #a=random.randint(0,11)
-    screen.draw.text(str(facts[action%(len(facts))]), center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
+    screen.draw.text(str(facts[action%(len(facts))]), fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=27, width=600, color='red')
 
 #objects/slides
 class slide:
@@ -58,9 +60,10 @@ class slide:
         self.prompt=prompt
     def draw(self):
         self.blackscreen()
-        screen.draw.text(str(self.text), center=(WIDTH//2,HEIGHT//2), fontsize=32, width=600)
+        screen.draw.text(str(self.text), fontname='charybdis', center=(WIDTH//2,HEIGHT//2), fontsize=32, width=600)
         self.prompt()
 
+#objects/levels
 class level:
     def __init__(self,game_level,live,dead,background,*enemies):
         self.game_level= game_level
@@ -76,7 +79,7 @@ class level:
         self.turtle.draw()
         for e in self.enemies:
             e.draw()
-        screen.draw.text(str(count), color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
+        screen.draw.text(str(count), fontname='charybdis', color='white' , midtop=(WIDTH-50,HEIGHT-70),fontsize=60)
 
 #making slides and levels
 slide1=slide('Year 2005',presstocontinue)
@@ -115,13 +118,14 @@ plasticoceans.org\n\
 oceana.org\n',presstoexit)
 slide99=slide('', youlost)
 
-#combine slides
+#fetch slides and levels into an array
 slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide12,slide13,slide14,level4, slide15, slide99]
 
+#draw the game, basically
 def draw():
     slides[i].draw()
 
-#define what happens for pressing different keys
+#define what happens when different keys are pressed
 def on_key_down():
     global i
     global count
