@@ -13,6 +13,7 @@ TARGET = 1
 i=0
 count=0
 temp=0
+temp1=0
 action=0
 
 #music
@@ -163,7 +164,7 @@ def on_key_down():
         if not (i == 4 or i== 8 or i==12 or i==17 or i==(len(slides)-3) or i==(len(slides)-2) or i==(len(slides)-1)):
             i+=1
         elif i==(len(slides)-3):
-            music.top()
+            music.stop()
             exit()
     action+=1
 
@@ -217,7 +218,7 @@ def make99():
     global temp
     global slides
     temp=i
-    i=len(slides)-1
+    i=len(slides)-2
 
 #go to a 'Level up!' slide
 def make100():
