@@ -8,6 +8,7 @@ HEIGHT = 800
 SPEED = 4
 VELOCITY = 40
 TARGET = 1
+TARGET = 6
 
 # Initial state of the game
 i=0
@@ -34,7 +35,6 @@ def youlost():
     screen.draw.text("Press space to try again or escape to exit the game", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def levelup():
     screen.draw.text("Level up!", fontname='charybdis', center=(WIDTH//2, HEIGHT//2), fontsize=64)
-    screen.draw.text("Press space to continue", fontname='charybdis', center=(WIDTH//2, HEIGHT-100), fontsize=26)
 def fact():
     facts=['100,000 marine mammals and turtles and 1 million sea  birds are killed by marine plastic pollution annually.',
     'Recent studies have revealed marine plastic pollution in 100% of marine turtles, 59% of whales, \
@@ -120,11 +120,9 @@ plasticoceans.org\n\
 5gyres.org\n\
 oceana.org\n',presstoexit)
 slide99=slide('', youlost)
-slide100=slide('', levelup)
 
 #fetch slides and levels into an array
-slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,\
-level3,slide11,slide12,slide13,slide14,level4,slide15,slide99,slide100]
+slides=[slide1,slide2,slide3,slide4,level1,slide5,slide6,slide7,level2,slide8,slide9,slide10,level3,slide11, slide12,slide13,slide14,level4, slide15, slide99]
 
 #draw the game, basically
 def draw():
@@ -135,8 +133,6 @@ def on_key_down():
     global i
     global count
     global action
-    global temp
-    global temp1
     if i==4 or i==8 or i ==12 or i==17:
         if not slides[i].turtle.dead:
             if keyboard.up:
@@ -151,18 +147,16 @@ def on_key_down():
         if keyboard.space:
             i=temp
             reset_turtle()
-            for e in slides[i].enemies: #reset enemies
+            for e in slides[i].enemies:
                 e.x = WIDTH
         if keyboard.escape:
             music.stop()
             exit()
-    elif i == len(slides)-1:
-        if keyboard.space:
-            i=temp1+1
+
     if keyboard.space:
-        if not (i == 4 or i== 8 or i==12 or i==17 or i==18):
+        if not (i == 4 or i== 8 or i==12 or i==17 or i==(len(slides)-2) or i==(len(slides)-1)):
             i+=1
-        elif i==18:
+        elif i==(len(slides)-2):
             music.top()
             exit()
     action+=1
@@ -196,17 +190,9 @@ def update_turtle():
 def check_count():
     global count
     global i
-    if count >= TARGET:
+    if count >= TARGET and (slides[i].turtle.dead)==False:
         count = 0
         i+=1
-
-    if count >= TARGET:
-        count=0
-        if i==4 or i==8 or i ==12:
-            make100()
-        else:
-            i+=1
-
 
 #see if tutrtle died
 def checkturtledead():
@@ -219,17 +205,12 @@ def make99():
     global i
     global temp
     temp=i
-    i=len(slides)-2
-
-#go to a 'Level up!' slide
-def make100():
-    global i
-    global temp1
-    temp1=i
     i=len(slides)-1
 
 #reset turtle position and state
 def reset_turtle():
+    global count
+    global slides
     count=0
     slides[i].turtle.dead = False
     slides[i].turtle.pos = (75, HEIGHT//2)
@@ -246,7 +227,7 @@ def update_enemy(enemies):
         e.x -= SPEED+enemies.index(e)
         x[enemies.index(e)]=e.right
     for e in enemies:
-        if e.right < 0:
+        if not e.right >= 0:
             reset_enemy(e,x)
             count+=1
             check_count()
@@ -264,15 +245,7 @@ def reset_enemy(enemy,x):
 def update():
     if i==4 or i==8 or i ==12 or i==17:
         update_turtle()
-<<<<<<< HEAD
-<<<<<<< HEAD
         print("dead"+str(slides[i].turtle.dead))
         update_enemy(slides[i].enemies)
     print("i"+str(i))
     print("count"+str(count))
-=======
-        update_enemy(slides[i].enemies)
->>>>>>> parent of b5971eb... Update Level_3_main.py
-=======
-        update_enemy(slides[i].enemies)
->>>>>>> parent of b5971eb... Update Level_3_main.py
